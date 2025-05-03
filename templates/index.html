@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-primary: #2c9d8f;
+        --color-secondary: #515151;
+        --color-desc: #a49898;
+        --background-primary: #2c9d8f;
+      }
+
+      @layer base {
+        body {
+          font-family: "Poppins", sans-serif;
+        }
+      }
+
+      .menu {
+        display: flex;
+        gap: 40px;
+      }
+
+    </style>
+    <title>Jenis kulit</title>
+  </head>
+  <body>
+    <header class="fixed top-0 left-0 w-full z-50 bg-white">
+      <nav class="flex justify-between items-center bg-white py-2 container mx-auto">
+        <div class="flex items-center w-[80px] h-[80px]">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt=""
+          />
+        </div>
+        <ul class="menu" >
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="#about-section">About</a></li>
+          <li><a href="./skintype.html">Skin Type</a></li>
+        </ul>
+        <div class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
+          <a href="#" class="text-white text-base font-semibold">Scan Skin</a>
+          <div
+            class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
+          >
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 38 38"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section id="hero-section" class="relative flex justify-between items-center mt-24 container mx-auto">
+      <div class="max-w-[661px] z-10">
+        <h1 class="text-[58px] font-bold text-secondary leading-[70px]">
+          Kesehatan <span class="text-primary">kulitmu</span> adalah prioritas
+          kami
+        </h1>
+        <p class="text-desc text-[20px] font-normal leading-[30px] mt-4 my-12">
+          Kami hadir untuk membantumu mengenali jenis kulit berminyak, kering,
+          normal atau kombinasi dengan mudah melalui pemindaian gambar wajah.
+          Dapatkan rekomendasi kandungan skincare yang sesuai, agar perawatan
+          kulitmu lebih efektif dan tepat sasaran.
+        </p>
+        <a
+          href="#"
+          class="bg-primary rounded-xl text-white font-bold text-lg px-6 py-3"
+          >Konsultasi sekarang</a
+        >
+      </div>
+      <div>
+        <img
+          src="{{ url_for('static', filename='images/hero-img.png') }}"
+          alt=""
+        />
+      </div>
+      <img src="{{ url_for('static', filename='images/vector.png') }}" alt="" class="absolute bottom-0 right-1/2 z-0 w-[200px]" />
+    </section>
+    <section id="about-section" class="flex justify-between items-center mt-20 gap-[58px] container mx-auto">
+      <div class="w-1/2">
+        <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="" />
+      </div>
+      <div class="w-1/2">
+        <h2 class="text-[48px] text-secondary font-bold">Tentang <span class="text-primary">CS</span>KIN</h2>
+        <p class="text-desc text-[20px] font-normal leading-[30px] mt-7">
+          CSKIN adalah platform kecantikan yang berfokus pada kesehatan kulit
+          wajah. Fitur utama kami adalah Scan Skin untuk memindai jenis kulit
+          wajah dan Chatbot AI untuk membantu anda berkonsultasi mengenai
+          penyakit kulit.</br>
+          </br>
+          Kami percaya bahwa setiap orang berhak mendapatkan perawatan kulit
+          yang sesuai dengan kebutuhan dan tipe kulitnya.
+        </p>
+      </div>
+    </section>
+    <section class="mt-20 container mx-auto">
+      <h2 class="text-[48px] text-secondary font-bold"><span class="text-primary">kenali</span> tipe kulit wajah</h2>
+      <p class="text-desc text-[20px] font-normal leading-[30px] mt-7">Kulit Wajah merupakan bagian tubuh terluar yang memiliki peran penting untuk melindungi wajah. Ayo kenali tipe kulitmu untuk menentukan kandungan yang baik dan sesuai dengan basic skincaremu.</p>
+      <div class="grid grid-cols-4 gap-4 mt-10">
+        <div class="relative rounded-[38px] overflow-hidden">
+          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="">
+          <!-- Overlay dengan gradien -->
+          <div class="absolute inset-0 bg-black opacity-50"></div>
+          <!-- Teks di tengah -->
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
+            <span class="text-white font-bold text-[28px] text-center">
+              Berminyak
+            </span>
+          </div>
+        </div>
+        <div class="relative rounded-[38px] overflow-hidden">
+          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="">
+          <!-- Overlay dengan gradien -->
+          <div class="absolute inset-0 bg-black opacity-50"></div>
+          <!-- Teks di tengah -->
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
+            <span class="text-white font-bold text-[28px] text-center">
+              kering
+            </span>
+          </div>
+        </div>
+        <div class="relative rounded-[38px] overflow-hidden">
+          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="">
+          <!-- Overlay dengan gradien -->
+          <div class="absolute inset-0 bg-black opacity-50"></div>
+          <!-- Teks di tengah -->
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
+            <span class="text-white font-bold text-[28px] text-center">
+              Kombinasi
+            </span>
+          </div>
+        </div>
+        <div class="relative rounded-[38px] overflow-hidden">
+          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="">
+          <!-- Overlay dengan gradien -->
+          <div class="absolute inset-0 bg-black opacity-50"></div>
+          <!-- Teks di tengah -->
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
+            <span class="text-white font-bold text-[28px] text-center">
+              Normal
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mt-20 container mx-auto mb-40">
+      <div class="relative">
+        <div class="relative z-10">
+          <h2 class="text-primary text-[48px] font-bold text-center">Reminder</h2>
+          <p class="text-[#646464] text-center text-[40px] font-[500] my-8">
+            Be good to your skin, you’ll wear it </br>
+            everyday for the rest of your life
+          </p>
+          <hr>
+          <p class="text-[32px] text-primary text-center mt-7">Okay!</p>
+        </div>
+        <img
+          src="{{ url_for('static', filename='images/Group 7.png') }}"
+          alt=""
+          class="absolute bottom-0 right-0 w-[300px] z-0"
+        />
+      </div>
+    </section>
+    <footer class="bg-[#EAF5F4] py-10 pt-16">
+      <div class="container mx-auto flex justify-between">
+        <div class="flex items-center w-[80px] h-[80px]">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt=""
+          />
+          <span class="text-[32px] text-primary font-bold ml-2">
+            CS<span class="text-secondary">kin</span>
+          </spa>
+        </div>
+        <div class="flex flex-col gap-4 text-[#515151]">
+          <h2 class="font-semibold">Menu</h2>
+          <ul class="flex flex-col gap-4 text-[#515151]">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./skintype.html">Skin Type</a></li>
+          </ul>
+        </div>
+        <div class="flex flex-col gap-4 text-[#515151]">
+          <h2 class="font-semibold">Kontak / Hubungi Kami</h2>
+          <ul class="flex flex-col gap-4 text-[#515151]">
+            <li><a href="#">
+              Email : dilalovegood@gmail.com
+            </a></li>
+            <li><a href="#">
+              WhatsApp: +62 812 3456 7890
+            </a></li>
+            <li><a href="#">
+              Instagram: @cskin
+            </a></li>
+          </ul>
+        </div>
+        <div class="flex flex-col gap-4">
+          <a class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
+            <span href="#" class="text-white text-base font-semibold">Scan Skin</span>
+            <div
+              class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
+            >
+              <svg
+                width="38"
+                height="38"
+                viewBox="0 0 38 38"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+          </a>
+          <a class="bg-white rounded-xl px-4 py-2 border border-primary text-center">
+            <span href="#" class="text-primary text-center text-base font-semibold">Konsultasi</span>
+          </a>
+        </div>
+      </div>
+      <div class="container mx-auto mt-20">
+        <hr>
+        <div class="text-center justify-between flex mt-5">
+          <p class="text-[#515151] text-sm font-normal">© 2023 CSKIN. All rights reserved.</p>
+          <p class="text-[#515151] text-sm font-normal">Terms of Service | Privacy Policy</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
