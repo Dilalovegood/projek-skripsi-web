@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skin Type</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
@@ -61,8 +62,288 @@
         </div>
       </nav>
     </header>
-    <section>
-      <div></div>
+    <section class="flex justify-between items-center mt-24 container mx-auto">
+      <div class="w-full flex flex-col items-center">
+        <h1 class="font-bold text-[48px] text-center text-secondary">
+          Upload atau <span class="text-primary">Scan</span> wajah kamu
+        </h1>
+        <p class="text-center text-desc text-[20px] mt-4">
+          Kami akan membantu kamu untuk mengetahui jenis kulit wajah kamu Fitur
+          Upload dan Scan wajah ini dibangun menggunakan Artificial Intelligence
+          arsitektur Vision Transformer yang akan membantu kamu mengenali jenis
+          kulitmu
+        </p>
+      </div>
     </section>
+    <section class="mt-20">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-4 container mx-auto mt-10"
+      >
+        <div
+          class="w-full rounded-xl h-[333px] flex flex-col items-center justify-center"
+          style="border: 3px solid #2c9d8f"
+        >
+          <input
+            class="bg-primary text-white px-4 py-2 rounded-lg max-w-[288px] hidden"
+            type="file"
+            name="Upload"
+            id="upload"
+            placeholder="upload image"
+            accept="image/*"
+          />
+          <img id="previewImage" class="hidden w-full h-[83%] object-cover rounded-xl" alt="img-preview"/>
+          <label
+            for="upload"
+            id="uploadLabel"
+            class="text-white bg-primary text-base font-semibold mt-2 cursor-pointer px-4 py-2 rounded-lg max-w-[288px]"
+            >Upload Image</label
+          >
+          <button
+            id="analyzeUpload"
+            class="hidden text-white bg-primary text-base font-semibold mt-4 px-6 py-2 rounded-lg"
+          >Mulai Analisis</button>
+        </div>
+        <div
+          class="bg-primary w-full rounded-xl h-[333px] flex flex-col items-center justify-center"
+        >
+          <video id="video" class="hidden w-full h-full object-cover rounded-xl"></video>
+          <canvas id="canvas" class="hidden w-full h-full object-cover rounded-xl"></canvas>
+          <button id="startCamera"
+            class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2 border-2 border-white"
+          >
+            <span class="text-white text-base font-semibold">Scan Skin</span>
+            <div
+              class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
+            >
+              <svg
+                width="38"
+                height="38"
+                viewBox="0 0 38 38"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+          </button>
+          <button id="captureButton" class="hidden flex items-center gap-2 bg-white rounded-xl px-4 py-2 border-2 border-primary mt-2">
+            <span class="text-primary text-base font-semibold">Ambil Foto</span>
+          </button>
+          <button
+            id="analyzeCapture"
+            class="hidden text-white bg-primary text-base font-semibold mt-4 px-6 py-2 rounded-lg border-2 border-white"
+          >Mulai Analisis</button>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-[#EAF5F4] py-10 pt-16 mt-40">
+      <div class="container mx-auto flex justify-between">
+        <div class="flex items-center w-[80px] h-[80px]">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt=""
+          />
+          <span class="text-[32px] text-primary font-bold ml-2">
+            CS<span class="text-secondary">kin</span>
+          </spa>
+        </div>
+        <div class="flex flex-col gap-4 text-[#515151]">
+          <h2 class="font-semibold">Menu</h2>
+          <ul class="flex flex-col gap-4 text-[#515151]">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./skintype.html">Skin Type</a></li>
+          </ul>
+        </div>
+        <div class="flex flex-col gap-4 text-[#515151]">
+          <h2 class="font-semibold">Kontak / Hubungi Kami</h2>
+          <ul class="flex flex-col gap-4 text-[#515151]">
+            <li><a href="#">
+              Email : dilalovegood@gmail.com
+            </a></li>
+            <li><a href="#">
+              WhatsApp: +62 812 3456 7890
+            </a></li>
+            <li><a href="#">
+              Instagram: @cskin
+            </a></li>
+          </ul>
+        </div>
+        <div class="flex flex-col gap-4">
+          <a class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
+            <span href="#" class="text-white text-base font-semibold">Scan Skin</span>
+            <div
+              class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
+            >
+              <svg
+                width="38"
+                height="38"
+                viewBox="0 0 38 38"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+          </a>
+          <a class="bg-white rounded-xl px-4 py-2 border border-primary text-center">
+            <span href="#" class="text-primary text-center text-base font-semibold">Konsultasi</span>
+          </a>
+        </div>
+      </div>
+      <div class="container mx-auto mt-20">
+        <hr>
+        <div class="text-center justify-between flex mt-5">
+          <p class="text-[#515151] text-sm font-normal">© 2023 CSKIN. All rights reserved.</p>
+          <p class="text-[#515151] text-sm font-normal">Terms of Service | Privacy Policy</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const startButton = document.getElementById('startCamera');
+      const captureButton = document.getElementById('captureButton');
+      const ctx = canvas.getContext('2d');
+      const upload = document.getElementById('upload');
+      const previewImage = document.getElementById('previewImage');
+      const uploadLabel = document.getElementById('uploadLabel');
+      const analyzeUpload = document.getElementById('analyzeUpload');
+      const analyzeCapture = document.getElementById('analyzeCapture');
+
+      startButton.addEventListener('click', async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ 
+            video: { 
+              facingMode: 'user',
+              width: { ideal: 1280 },
+              height: { ideal: 720 }
+            } 
+          });
+          video.srcObject = stream;
+          video.classList.remove('hidden');
+          video.play();
+          startButton.classList.add('hidden');
+          captureButton.classList.remove('hidden');
+        } catch (err) {
+          console.error('Error accessing camera:', err);
+          alert('Tidak dapat mengakses kamera');
+        }
+      });
+
+      // captureButton.addEventListener('click', () => {
+      //   canvas.width = video.videoWidth;
+      //   canvas.height = video.videoHeight;
+      //   ctx.drawImage(video, 0, 0);
+        
+      //   // Hentikan stream kamera
+      //   const stream = video.srcObject;
+      //   const tracks = stream.getTracks();
+      //   tracks.forEach(track => track.stop());
+        
+      //   // Tampilkan hasil foto
+      //   video.classList.add('hidden');
+      //   canvas.classList.remove('hidden');
+        
+      //   // Convert canvas to blob
+      //   canvas.toBlob((blob) => {
+      //     const formData = new FormData();
+      //     formData.append('image', blob, 'captured-photo.jpg');
+          
+      //     // Kirim ke server (sesuaikan URL endpoint)
+      //     fetch('/upload-photo', {
+      //       method: 'POST',
+      //       body: formData
+      //     })
+      //     .then(response => response.json())
+      //     .then(data => {
+      //       console.log('Success:', data);
+      //       // Handle response dari server
+      //     })
+      //     .catch(error => {
+      //       console.error('Error:', error);
+      //     });
+      //   }, 'image/jpeg');
+      // });
+
+      upload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            previewImage.src = e.target.result;
+            previewImage.classList.remove('hidden');
+            uploadLabel.classList.add('hidden');
+            analyzeUpload.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Modifikasi event listener capture button
+      captureButton.addEventListener('click', () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0);
+        
+        const stream = video.srcObject;
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        
+        video.classList.add('hidden');
+        canvas.classList.remove('hidden');
+        captureButton.classList.add('hidden');
+        analyzeCapture.classList.remove('hidden');
+      });
+
+      // Handle analisis untuk uploaded image
+      analyzeUpload.addEventListener('click', () => {
+        const formData = new FormData();
+        formData.append('image', upload.files[0]);
+        
+        fetch('/analyze-photo', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Analysis result:', data);
+          // Redirect atau tampilkan hasil
+          window.location.href = `/result?id=${data.id}`;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+
+      // Handle analisis untuk captured image
+      analyzeCapture.addEventListener('click', () => {
+        canvas.toBlob((blob) => {
+          const formData = new FormData();
+          formData.append('image', blob, 'captured-photo.jpg');
+          
+          fetch('/analyze-photo', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Analysis result:', data);
+            // Redirect atau tampilkan hasil
+            window.location.href = `/result?id=${data.id}`;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }, 'image/jpeg');
+      });
+    </script>
   </body>
 </html>

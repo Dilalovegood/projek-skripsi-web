@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>details</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
@@ -22,22 +23,22 @@
         display: flex;
         gap: 40px;
       }
-
     </style>
-    <title>Jenis kulit</title>
   </head>
   <body>
     <header class="fixed top-0 left-0 w-full z-50 bg-white">
-      <nav class="flex justify-between items-center bg-white py-2 container mx-auto">
+      <nav
+        class="flex justify-between items-center bg-white py-2 container mx-auto"
+      >
         <div class="flex items-center w-[80px] h-[80px]">
           <img
             src="{{ url_for('static', filename='images/logo.png') }}"
             alt=""
           />
         </div>
-        <ul class="menu" >
-          <li><a href="#hero-section">Home</a></li>
-          <li><a href="#about-section">About</a></li>
+        <ul class="menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about-section">About</a></li>
           <li><a href="/scantype">Skin Type</a></li>
         </ul>
         <div class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
@@ -61,115 +62,87 @@
         </div>
       </nav>
     </header>
-    <section id="hero-section" class="relative flex justify-between items-center mt-24 container mx-auto">
-      <div class="max-w-[661px] z-10">
-        <h1 class="text-[58px] font-bold text-secondary leading-[70px]">
-          Kesehatan <span class="text-primary">kulitmu</span> adalah prioritas
-          kami
+    <section class="flex flex-col justify-between items-center mt-24 container mx-auto">
+      <div class="w-full flex flex-col items-center">
+        <h1 class="font-bold text-[48px] text-center text-secondary">
+          Tipe kulit anda <span class="text-primary">Berminyak</span>
         </h1>
-        <p class="text-desc text-[20px] font-normal leading-[30px] mt-4 my-12">
-          Kami hadir untuk membantumu mengenali jenis kulit berminyak, kering,
-          normal atau kombinasi dengan mudah melalui pemindaian gambar wajah.
-          Dapatkan rekomendasi kandungan skincare yang sesuai, agar perawatan
-          kulitmu lebih efektif dan tepat sasaran.
-        </p>
-        <a
-          href="#"
-          class="bg-primary rounded-xl text-white font-bold text-lg px-6 py-3"
-          >Konsultasi sekarang</a
-        >
-      </div>
-      <div>
-        <img
-          src="{{ url_for('static', filename='images/hero-img.png') }}"
-          alt=""
-        />
-      </div>
-      <img src="{{ url_for('static', filename='images/vector.png') }}" alt="" class="absolute bottom-0 right-1/2 z-0 w-[200px]" />
-    </section>
-    <section id="about-section" class="flex justify-between items-center mt-20 gap-[58px] container mx-auto">
-      <div class="w-1/2">
-        <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="" />
-      </div>
-      <div class="w-1/2">
-        <h2 class="text-[48px] text-secondary font-bold">Tentang <span class="text-primary">CS</span>KIN</h2>
-        <p class="text-desc text-[20px] font-normal leading-[30px] mt-7">
-          CSKIN adalah platform kecantikan yang berfokus pada kesehatan kulit
-          wajah. Fitur utama kami adalah Scan Skin untuk memindai jenis kulit
-          wajah dan Chatbot AI untuk membantu anda berkonsultasi mengenai
-          penyakit kulit.</br>
-          </br>
-          Kami percaya bahwa setiap orang berhak mendapatkan perawatan kulit
-          yang sesuai dengan kebutuhan dan tipe kulitnya.
-        </p>
-      </div>
-    </section>
-    <section class="mt-20 container mx-auto">
-      <h2 class="text-[48px] text-secondary font-bold"><span class="text-primary">kenali</span> tipe kulit wajah</h2>
-      <p class="text-desc text-[20px] font-normal leading-[30px] mt-7">Kulit Wajah merupakan bagian tubuh terluar yang memiliki peran penting untuk melindungi wajah. Ayo kenali tipe kulitmu untuk menentukan kandungan yang baik dan sesuai dengan basic skincaremu.</p>
-      <div class="grid grid-cols-4 gap-4 mt-10">
-        <div class="relative rounded-[38px] overflow-hidden">
-          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="">
-          <!-- Overlay dengan gradien -->
-          <div class="absolute inset-0 bg-black opacity-50"></div>
-          <!-- Teks di tengah -->
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
-              Berminyak
-            </span>
-          </div>
+        <div class="max-w-[400px] mt-10">
+          <img src="{{ url_for('static', filename='images/dummy.png') }}" alt="">
         </div>
-        <div class="relative rounded-[38px] overflow-hidden">
-          <img src="{{ url_for('static', filename='images/kering.png') }}" alt="">
-          <!-- Overlay dengan gradien -->
-          <div class="absolute inset-0 bg-black opacity-50"></div>
-          <!-- Teks di tengah -->
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
-              kering
-            </span>
-          </div>
-        </div>
-        <div class="relative rounded-[38px] overflow-hidden">
-          <img src="{{ url_for('static', filename='images/kombinasi.png') }}" alt="">
-          <!-- Overlay dengan gradien -->
-          <div class="absolute inset-0 bg-black opacity-50"></div>
-          <!-- Teks di tengah -->
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
-              Kombinasi
-            </span>
-          </div>
-        </div>
-        <div class="relative rounded-[38px] overflow-hidden">
-          <img src="{{ url_for('static', filename='images/normal.png') }}" alt="">
-          <!-- Overlay dengan gradien -->
-          <div class="absolute inset-0 bg-black opacity-50"></div>
-          <!-- Teks di tengah -->
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
-              Normal
-            </span>
-          </div>
-        </div>
+        <h2 class="font-bold text-[48px] text-center text-secondary mt-[60px]">
+          <span class="text-primary">Rekomendasi</span>  Kandungan Skincare
+        </h2>
       </div>
-    </section>
-    <section class="mt-20 container mx-auto">
-      <div class="relative">
-        <div class="relative z-10">
-          <h2 class="text-primary text-[48px] font-bold text-center">Reminder</h2>
-          <p class="text-[#646464] text-center text-[40px] font-[500] my-8">
-            Be good to your skin, you’ll wear it </br>
-            everyday for the rest of your life
-          </p>
-          <hr>
-          <p class="text-[32px] text-primary text-center mt-7">Okay!</p>
-        </div>
-        <img
-          src="{{ url_for('static', filename='images/Group 7.png') }}"
-          alt=""
-          class="absolute bottom-0 right-0 w-[300px] z-0"
-        />
+      <div class="mt-[60px]">
+        <ul class="flex flex-col gap-4">
+          <li class="flex flex-row items-center gap-10">
+            <div class="px-10 max-w-[300px] flex flex-col items-center">
+              <img class="max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="">
+              <span class="text-[18px] text-center w-full text-primary font-semibold mt-4">
+                Cleanser
+              </span>
+            </div>
+            <div class="p-10 bg-[#EAF5F4] rounded-xl ">
+              <p class="text-[#515151] text-[20px] font-normal">
+                Gunakan cleanser yang mengandung salicylic acid untuk membantu
+                mengontrol minyak berlebih dan mencegah jerawat.
+              </p>
+              <p class="text-[#515151] text-[20px] font-normal mt-4">
+                Pilihlah cleanser yang lembut dan tidak mengandung alkohol agar
+                tidak membuat kulit semakin kering.
+              </p>
+              <p class="text-[#515151] text-[20px] font-normal mt-4">
+                Gunakan cleanser dua kali sehari, pagi dan malam, untuk hasil
+                yang optimal. 
+              </p>
+            </div>
+          </li>
+          <li class="flex flex-row items-center gap-10">
+            <div class="px-10 max-w-[300px] flex flex-col items-center">
+              <img class="max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="">
+              <span class="text-[18px] text-center w-full text-primary font-semibold mt-4">
+                Moisturizer
+              </span>
+            </div>
+            <div class="p-10 bg-[#EAF5F4] rounded-xl ">
+              <p class="text-[#515151] text-[20px] font-normal">
+                Gunakan cleanser yang mengandung salicylic acid untuk membantu
+                mengontrol minyak berlebih dan mencegah jerawat.
+              </p>
+              <p class="text-[#515151] text-[20px] font-normal mt-4">
+                Pilihlah cleanser yang lembut dan tidak mengandung alkohol agar
+                tidak membuat kulit semakin kering.
+              </p>
+              <p class="text-[#515151] text-[20px] font-normal mt-4">
+                Gunakan cleanser dua kali sehari, pagi dan malam, untuk hasil
+                yang optimal. 
+              </p>
+            </div>
+          </li>
+          <li class="flex flex-row items-center gap-10">
+            <div class="px-10 max-w-[300px] flex flex-col items-center">
+              <img class="max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="">
+              <span class="text-[18px] text-center w-full text-primary font-semibold mt-4">
+                Protector
+              </span>
+            </div>
+            <div class="p-10 bg-[#EAF5F4] rounded-xl ">
+              <p class="text-[#515151] text-[20px] font-normal">
+                Gunakan cleanser yang mengandung salicylic acid untuk membantu
+                mengontrol minyak berlebih dan mencegah jerawat.
+              </p>
+              <p class="text-[#515151] text-[20px] font-normal mt-4">
+                Pilihlah cleanser yang lembut dan tidak mengandung alkohol agar
+                tidak membuat kulit semakin kering.
+              </p>
+              <p class="text-[#515151] text-[20px] font-normal mt-4">
+                Gunakan cleanser dua kali sehari, pagi dan malam, untuk hasil
+                yang optimal. 
+              </p>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
     <footer class="bg-[#EAF5F4] py-10 pt-16 mt-40">

@@ -12,5 +12,9 @@ def create_app():
     @app.route('/scantype')
     def skinType():
         return render_template('skintype.html')
+    
+    @app.route('/details')
+    def details():
+        return render_template('single-skintype.html')
 
     return app
