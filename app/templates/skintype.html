@@ -307,42 +307,45 @@
       analyzeUpload.addEventListener('click', () => {
         const formData = new FormData();
         formData.append('image', upload.files[0]);
+
+        window.location.href = '/result'
         
-        fetch('/analyze-photo', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Analysis result:', data);
-          // Redirect atau tampilkan hasil
-          window.location.href = `/result?id=${data.id}`;
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+        // fetch('/analyze-photo', {
+        //   method: 'POST',
+        //   body: formData
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //   console.log('Analysis result:', data);
+        //   // Redirect atau tampilkan hasil
+        //   window.location.href = `/result?id=${data.id}`;
+        // })
+        // .catch(error => {
+        //   console.error('Error:', error);
+        // });
       });
 
       // Handle analisis untuk captured image
       analyzeCapture.addEventListener('click', () => {
-        canvas.toBlob((blob) => {
-          const formData = new FormData();
-          formData.append('image', blob, 'captured-photo.jpg');
+        window.location.href = '/result'
+        // canvas.toBlob((blob) => {
+        //   const formData = new FormData();
+        //   formData.append('image', blob, 'captured-photo.jpg');
           
-          fetch('/analyze-photo', {
-            method: 'POST',
-            body: formData
-          })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Analysis result:', data);
-            // Redirect atau tampilkan hasil
-            window.location.href = `/result?id=${data.id}`;
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-        }, 'image/jpeg');
+        //   fetch('/analyze-photo', {
+        //     method: 'POST',
+        //     body: formData
+        //   })
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     console.log('Analysis result:', data);
+        //     // Redirect atau tampilkan hasil
+        //     window.location.href = `/result?id=${data.id}`;
+        //   })
+        //   .catch(error => {
+        //     console.error('Error:', error);
+        //   });
+        // }, 'image/jpeg');
       });
     </script>
   </body>

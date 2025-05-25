@@ -13,7 +13,7 @@ def create_app():
     def skinType():
         return render_template('skintype.html')
     
-    @app.route('/details')
+    @app.route('/result')
     def details():
         return render_template('single-skintype.html')
 
