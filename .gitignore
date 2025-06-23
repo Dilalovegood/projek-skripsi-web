@@ -8,3 +8,23 @@ tf-env
 /tf-env/bin/
 /tf-env/lib/
 /tf-env/lib64/
+
+.models
+/models/
+models/
+
+# ignore models
+*.h5
+*.ckpt
+*.pt
+*.pth
+*.pkl
+*.onnx
+*.pb
+*.tflite
+*.weights
+*.json
+*.yaml
+*.yml
+*.xml
+*.hdf5
