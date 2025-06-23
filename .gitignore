@@ -1,19 +1,17 @@
-/venv
-.venv
-venv
-
-.tv-env
-tf-env
+# Virtual Environment
+/venv/
+.venv/
+venv/
+.tv-env/
+tf-env/
 /tf-env/
-/tf-env/bin/
-/tf-env/lib/
-/tf-env/lib64/
 
-.models
-/models/
+# Models directory and files
 models/
+/models/
+**/models/
 
-# ignore models
+# Model file extensions
 *.h5
 *.ckpt
 *.pt
@@ -23,8 +21,33 @@ models/
 *.pb
 *.tflite
 *.weights
-*.json
-*.yaml
-*.yml
-*.xml
+*.model
 *.hdf5
+
+# Model metadata files
+model_config.json
+model_config.yaml
+model_config.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+
+# Uploads
+app/static/uploads/*
+!app/static/uploads/.gitkeep
