@@ -7,9 +7,9 @@ tf-env/
 /tf-env/
 
 # Models directory and files
-models/
-/models/
-**/models/
+# models/
+# /models/
+# **/models/
 
 # Model file extensions
 *.h5
