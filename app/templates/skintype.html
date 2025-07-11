@@ -344,128 +344,70 @@
       </div>
     </section>
 
-    <footer class="bg-[#EAF5F4] py-10 pt-16 mt-20 md:mt-40">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Logo Section -->
-          <div class="flex flex-col items-center md:items-start">
-            <div class="flex items-center">
-              <div class="w-[60px] h-[60px] md:w-[80px] md:h-[80px]">
-                <img
-                  src="{{ url_for('static', filename='images/logo.png') }}"
-                  alt="Logo"
-                  class="w-full h-full object-contain"
-                />
-              </div>
-              <span
-                class="text-[24px] md:text-[32px] text-primary font-bold ml-2"
-              >
-                CS<span class="text-secondary">kin</span>
-              </span>
-            </div>
-          </div>
-
-          <!-- Menu Section -->
-          <div
-            class="flex flex-col gap-4 text-[#515151] text-center md:text-left"
-          >
-            <h2 class="font-semibold">Menu</h2>
-            <ul class="flex flex-col gap-4 text-[#515151]">
-              <li>
-                <a href="/" class="hover:text-primary transition-colors"
-                  >Home</a
-                >
-              </li>
-              <li>
-                <a
-                  href="/#about-section"
-                  class="hover:text-primary transition-colors"
-                  >About</a
-                >
-              </li>
-              <li>
-                <a href="/scantype" class="hover:text-primary transition-colors"
-                  >Skin Type</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Contact Section -->
-          <div
-            class="flex flex-col gap-4 text-[#515151] text-center md:text-left"
-          >
-            <h2 class="font-semibold">Kontak / Hubungi Kami</h2>
-            <ul class="flex flex-col gap-4 text-[#515151] text-sm md:text-base">
-              <li>
-                <a
-                  href="mailto:dilalovegood@gmail.com"
-                  class="hover:text-primary transition-colors"
-                >
-                  Email : dilalovegood@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/6281234567890"
-                  class="hover:text-primary transition-colors"
-                >
-                  WhatsApp: +62 812 3456 7890
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://instagram.com/cskin"
-                  class="hover:text-primary transition-colors"
-                >
-                  Instagram: @cskin
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="flex flex-col gap-4 items-center md:items-end">
-            <a
-              href="#scan-section"
-              class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2 w-full md:w-auto justify-center"
-            >
-              <span class="text-white text-sm md:text-base font-semibold"
-                >Scan Skin</span
-              >
-              <div
-                class="w-[24px] h-[24px] md:w-[28px] md:h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 38 38"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
-                fill="white"
+    <footer class="bg-[#EAF5F4] py-10 pt-16 mt-20 lg:mt-40">
+      <div class="container mx-auto px-4 lg:px-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+          <!-- Logo -->
+          <div class="flex items-center justify-center sm:justify-start">
+            <div class="flex items-center w-[60px] h-[60px] lg:w-[80px] lg:h-[80px]">
+              <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt=""
+                class="w-full h-full object-contain"
               />
-            </svg>
+            </div>
+            <span class="text-[24px] lg:text-[32px] text-primary font-bold ml-2">
+              CS<span class="text-secondary">kin</span>
+            </span>
+          </div>
+          
+          <!-- Menu -->
+          <div class="text-center sm:text-left">
+            <h2 class="font-semibold text-[#515151] mb-4">Menu</h2>
+            <ul class="flex flex-col gap-3 text-[#515151]">
+              <li><a href="./index.html" class="hover:text-primary transition-colors">Home</a></li>
+              <li><a href="./about.html" class="hover:text-primary transition-colors">About</a></li>
+              <li><a href="./skintype.html" class="hover:text-primary transition-colors">Skin Type</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact -->
+          <div class="text-center sm:text-left">
+            <h2 class="font-semibold text-[#515151] mb-4">Kontak / Hubungi Kami</h2>
+            <ul class="flex flex-col gap-3 text-[#515151] text-sm lg:text-base">
+              <li><a href="#" class="hover:text-primary transition-colors">
+                Email : dilalovegood@gmail.com
+              </a></li>
+              <li><a href="#" class="hover:text-primary transition-colors">
+                WhatsApp: +62 812 3456 7890
+              </a></li>
+              <li><a href="#" class="hover:text-primary transition-colors">
+                Instagram: @cskin
+              </a></li>
+            </ul>
+          </div>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-col gap-4 items-center sm:items-start">
+            <a href="#" class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2 hover:bg-opacity-90 transition-all w-full sm:w-auto justify-center">
+              <span class="text-white text-base font-semibold">Scan Skin</span>
+              <div class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <a href="#" class="bg-white rounded-xl px-4 py-2 border border-primary text-center hover:bg-primary hover:text-white transition-all w-full sm:w-auto">
+              <span class="text-primary hover:text-white text-base font-semibold">Konsultasi</span>
+            </a>
           </div>
         </div>
-
-        <div class="mt-12 md:mt-20">
-          <hr class="border-gray-300" />
-          <div
-            class="flex flex-col md:flex-row justify-center md:justify-between items-center mt-5 gap-4"
-          >
-            <p
-              class="text-[#515151] text-xs md:text-sm font-normal text-center"
-            >
-              © 2023 CSKIN. All rights reserved.
-            </p>
-            <p
-              class="text-[#515151] text-xs md:text-sm font-normal text-center"
-            >
-              Terms of Service | Privacy Policy
-            </p>
+        
+        <div class="mt-12 lg:mt-20">
+          <hr>
+          <div class="flex flex-col sm:flex-row justify-between items-center mt-5 gap-4">
+            <p class="text-[#515151] text-sm font-normal text-center sm:text-left">© 2023 CSKIN. All rights reserved.</p>
+            <p class="text-[#515151] text-sm font-normal text-center sm:text-right">Terms of Service | Privacy Policy</p>
           </div>
         </div>
       </div>

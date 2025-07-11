@@ -94,52 +94,80 @@
       .skin-card:hover {
         transform: scale(1.05);
       }
+
+      .menu {
+        display: flex;
+        gap: 40px;
+      }
+
+      @media (max-width: 768px) {
+        .menu {
+          display: none;
+        }
+      }
     </style>
     <title>Jenis kulit</title>
   </head>
   <body>
-    <header class="fixed top-0 left-0 w-full z-50 bg-white">
-      <nav class="flex justify-between items-center bg-white py-2 container mx-auto">
-        <div class="flex items-center w-[80px] h-[80px]">
+    <header class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
+      <nav class="flex justify-between items-center bg-white py-2 container mx-auto px-4">
+        <div class="flex items-center w-[60px] h-[60px] md:w-[80px] md:h-[80px]">
           <img
             src="{{ url_for('static', filename='images/logo.png') }}"
-            alt=""
+            alt="Logo"
+            class="w-full h-full object-contain"
           />
         </div>
-        <ul class="menu" >
-          <li><a href="#hero-section">Home</a></li>
-          <li><a href="#about-section">About</a></li>
-          <li><a href="/scantype">Skin Type</a></li>
+
+        <!-- Desktop Menu -->
+        <ul class="menu hidden md:flex">
+          <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+          <li><a href="/#about-section" class="hover:text-primary transition-colors">About</a></li>
+          <li><a href="/scantype" class="hover:text-primary transition-colors">Skin Type</a></li>
         </ul>
-        <div class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
-          <a href="#" class="text-white text-base font-semibold">Scan Skin</a>
-          <div
-            class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
-          >
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 12.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
-                fill="white"
-              />
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="md:hidden p-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- Scan Button -->
+        <div class="hidden md:flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
+          <a href="/scantype" class="text-white text-base font-semibold">Scan Skin</a>
+          <div class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z" fill="white"/>
             </svg>
           </div>
         </div>
       </nav>
+
+      <!-- Mobile Menu Overlay -->
+      <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-4">
+        <ul class="flex flex-col gap-4">
+          <li><a href="/" class="block py-2 hover:text-primary transition-colors">Home</a></li>
+          <li><a href="/#about-section" class="block py-2 hover:text-primary transition-colors">About</a></li>
+          <li><a href="/scantype" class="block py-2 hover:text-primary transition-colors">Skin Type</a></li>
+        </ul>
+        <div class="mt-4">
+          <a href="/scantype" class="flex items-center justify-center gap-2 bg-primary rounded-xl px-4 py-3 w-full">
+            <span class="text-white text-base font-semibold">
+              Scan Skin
+            </span>
+          </a>
+        </div>
+      </div>
     </header>
 
-    <section id="hero-section" class="relative flex justify-between items-center mt-24 container mx-auto">
-      <div class="max-w-[661px] z-10">
-        <h1 class="text-[58px] font-bold text-secondary leading-[70px]">
+    <section id="hero-section" class="relative flex flex-col lg:flex-row justify-between items-center mt-20 lg:mt-24 px-4 lg:px-0 container mx-auto">
+      <div class="max-w-full lg:max-w-[661px] z-10 text-center lg:text-left mb-8 lg:mb-0">
+        <h1 class="text-[32px] sm:text-[40px] lg:text-[58px] font-bold text-secondary leading-[40px] sm:leading-[50px] lg:leading-[70px]">
           Kesehatan <span class="text-primary">kulitmu</span> adalah prioritas
           kami
         </h1>
-        <p class="text-desc text-[20px] font-normal leading-[30px] mt-4 my-12">
+        <p class="text-desc text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[27px] lg:leading-[30px] mt-4 my-8 lg:my-12">
           Kami hadir untuk membantumu mengenali jenis kulit berminyak, kering,
           normal atau kombinasi dengan mudah melalui pemindaian gambar wajah.
           Dapatkan rekomendasi kandungan skincare yang sesuai, agar perawatan
@@ -147,28 +175,29 @@
         </p>
         <a
           href="http://35.223.29.62:8000/"
-          class="bg-primary rounded-xl text-white font-bold text-lg px-6 py-3"
+          class="inline-block bg-primary rounded-xl text-white font-bold text-base lg:text-lg px-6 py-3 hover:bg-opacity-90 transition-all"
           >Konsultasi sekarang</a
         >
       </div>
-      <div>
-        <figure class="w-[600px] h-[500px] relative">
+      <div class="w-full lg:w-auto flex justify-center hidden md:flex">
+        <figure class="w-[300px] h-[250px] sm:w-[400px] sm:h-[350px] lg:w-[600px] lg:h-[500px] relative">
           <img
           src="{{ url_for('static', filename='images/hero-img.png') }}"
           alt=""
+          class="w-full h-full object-contain"
           />
         </figure>
       </div>
-      <img src="{{ url_for('static', filename='images/vector.png') }}" alt="" class="absolute bottom-0 right-1/2 z-0 w-[200px]" />
+      <img src="{{ url_for('static', filename='images/vector.png') }}" alt="" class="absolute bottom-0 right-1/2 z-0 w-[100px] sm:w-[150px] lg:w-[200px] hidden sm:block" />
     </section>
 
-    <section id="about-section" class="flex justify-between items-center mt-20 gap-[58px] container mx-auto pt-20">
-      <div class="w-1/2">
-        <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="" />
+    <section id="about-section" class="flex flex-col lg:flex-row justify-between items-center mt-5 md:mt-20 gap-8 lg:gap-[58px] px-4 lg:px-0 container mx-auto pt-5 md:pt-20">
+      <div class="w-full lg:w-1/2">
+        <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="" class="w-full h-auto" />
       </div>
-      <div class="w-1/2">
-        <h2 class="text-[48px] text-secondary font-bold">Tentang <span class="text-primary">CS</span>KIN</h2>
-        <p class="text-desc text-[20px] font-normal leading-[30px] mt-7">
+      <div class="w-full lg:w-1/2">
+        <h2 class="text-[32px] sm:text-[40px] lg:text-[48px] text-secondary font-bold text-center lg:text-left">Tentang <span class="text-primary">CS</span>KIN</h2>
+        <p class="text-desc text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[27px] lg:leading-[30px] mt-7 text-center lg:text-left">
           CSKIN adalah platform kecantikan yang berfokus pada kesehatan kulit
           wajah. Fitur utama kami adalah Scan Skin untuk memindai jenis kulit
           wajah dan Chatbot AI untuk membantu anda berkonsultasi mengenai
@@ -180,42 +209,42 @@
       </div>
     </section>
 
-    <section class="mt-20 container mx-auto">
-      <h2 class="text-[48px] text-secondary font-bold"><span class="text-primary">kenali</span> tipe kulit wajah</h2>
-      <p class="text-desc text-[20px] font-normal leading-[30px] mt-7">Kulit Wajah merupakan bagian tubuh terluar yang memiliki peran penting untuk melindungi wajah. Ayo kenali tipe kulitmu untuk menentukan kandungan yang baik dan sesuai dengan basic skincaremu.</p>
-      <div class="grid grid-cols-4 gap-4 mt-10">
+    <section class="mt-20 px-4 lg:px-0 container mx-auto">
+      <h2 class="text-[32px] sm:text-[40px] lg:text-[48px] text-secondary font-bold text-center lg:text-left"><span class="text-primary">kenali</span> tipe kulit wajah</h2>
+      <p class="text-desc text-[16px] sm:text-[18px] lg:text-[20px] font-normal leading-[24px] sm:leading-[27px] lg:leading-[30px] mt-7 text-center lg:text-left">Kulit Wajah merupakan bagian tubuh terluar yang memiliki peran penting untuk melindungi wajah. Ayo kenali tipe kulitmu untuk menentukan kandungan yang baik dan sesuai dengan basic skincaremu.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
         <div class="skin-card relative rounded-[38px] overflow-hidden" onclick="openModal('berminyak')">
-          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="">
+          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="" class="w-full h-48 sm:h-56 lg:h-64 object-cover">
           <div class="absolute inset-0 bg-black opacity-50"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
+            <span class="text-white font-bold text-[20px] sm:text-[24px] lg:text-[28px] text-center">
               Berminyak
             </span>
           </div>
         </div>
         <div class="skin-card relative rounded-[38px] overflow-hidden" onclick="openModal('kering')">
-          <img src="{{ url_for('static', filename='images/kering.png') }}" alt="">
+          <img src="{{ url_for('static', filename='images/kering.png') }}" alt="" class="w-full h-48 sm:h-56 lg:h-64 object-cover">
           <div class="absolute inset-0 bg-black opacity-50"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
+            <span class="text-white font-bold text-[20px] sm:text-[24px] lg:text-[28px] text-center">
               kering
             </span>
           </div>
         </div>
         <div class="skin-card relative rounded-[38px] overflow-hidden" onclick="openModal('kombinasi')">
-          <img src="{{ url_for('static', filename='images/kombinasi.png') }}" alt="">
+          <img src="{{ url_for('static', filename='images/kombinasi.png') }}" alt="" class="w-full h-48 sm:h-56 lg:h-64 object-cover">
           <div class="absolute inset-0 bg-black opacity-50"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
+            <span class="text-white font-bold text-[20px] sm:text-[24px] lg:text-[28px] text-center">
               Kombinasi
             </span>
           </div>
         </div>
         <div class="skin-card relative rounded-[38px] overflow-hidden" onclick="openModal('normal')">
-          <img src="{{ url_for('static', filename='images/normal.png') }}" alt="">
+          <img src="{{ url_for('static', filename='images/normal.png') }}" alt="" class="w-full h-48 sm:h-56 lg:h-64 object-cover">
           <div class="absolute inset-0 bg-black opacity-50"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-            <span class="text-white font-bold text-[28px] text-center">
+            <span class="text-white font-bold text-[20px] sm:text-[24px] lg:text-[28px] text-center">
               Normal
             </span>
           </div>
@@ -227,16 +256,16 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal('berminyak')">&times;</span>
         <div class="relative">
-          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="Kulit Berminyak" class="w-full h-64 object-cover rounded-t-[20px]">
+          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="Kulit Berminyak" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
           <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[36px] text-center">Kulit Berminyak</h2>
+            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Berminyak</h2>
           </div>
         </div>
-        <div class="p-8">
+        <div class="p-4 sm:p-6 lg:p-8">
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Berminyak:</h3>
-            <ul class="list-disc pl-5 text-desc text-[18px] space-y-2">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Berminyak:</h3>
+            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
               <li>Produksi sebum berlebihan</li>
               <li>Pori-pori terlihat besar dan jelas</li>
               <li>Wajah terlihat mengkilap, terutama di T-zone</li>
@@ -246,11 +275,11 @@
           </div>
           
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pembersih:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Salicylic Acid (BHA)</li>
                   <li>• Tea Tree Oil</li>
                   <li>• Charcoal</li>
@@ -259,7 +288,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Toner:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Witch Hazel</li>
                   <li>• Niacinamide</li>
                   <li>• AHA/BHA</li>
@@ -268,7 +297,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Serum:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Niacinamide 10%</li>
                   <li>• Hyaluronic Acid</li>
                   <li>• Vitamin C</li>
@@ -277,7 +306,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pelembab:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Water-based moisturizer</li>
                   <li>• Gel moisturizer</li>
                   <li>• Oil-free formula</li>
@@ -289,7 +318,7 @@
           
           <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
             <h4 class="font-semibold text-secondary mb-2">⚠️ Hindari Bahan Ini:</h4>
-            <p class="text-desc text-[16px]">Alcohol denat, Heavy oils (coconut oil, olive oil), Over-exfoliating products, Harsh sulfates</p>
+            <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">Alcohol denat, Heavy oils (coconut oil, olive oil), Over-exfoliating products, Harsh sulfates</p>
           </div>
         </div>
       </div>
@@ -299,16 +328,16 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal('kering')">&times;</span>
         <div class="relative">
-          <img src="{{ url_for('static', filename='images/kering.png') }}" alt="Kulit Kering" class="w-full h-64 object-cover rounded-t-[20px]">
+          <img src="{{ url_for('static', filename='images/kering.png') }}" alt="Kulit Kering" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
           <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[36px] text-center">Kulit Kering</h2>
+            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Kering</h2>
           </div>
         </div>
-        <div class="p-8">
+        <div class="p-4 sm:p-6 lg:p-8">
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kering:</h3>
-            <ul class="list-disc pl-5 text-desc text-[18px] space-y-2">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kering:</h3>
+            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
               <li>Produksi sebum sangat sedikit</li>
               <li>Terasa kencang dan kasar</li>
               <li>Mudah mengelupas dan bersisik</li>
@@ -318,11 +347,11 @@
           </div>
           
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pembersih:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Cream cleanser</li>
                   <li>• Oil cleanser</li>
                   <li>• Milk cleanser</li>
@@ -331,7 +360,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Toner:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Hyaluronic Acid</li>
                   <li>• Glycerin</li>
                   <li>• Rose Water</li>
@@ -340,7 +369,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Serum:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Hyaluronic Acid</li>
                   <li>• Vitamin E</li>
                   <li>• Squalane</li>
@@ -349,7 +378,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pelembab:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Rich cream moisturizer</li>
                   <li>• Shea butter</li>
                   <li>• Ceramides</li>
@@ -361,7 +390,7 @@
           
           <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
             <h4 class="font-semibold text-secondary mb-2">⚠️ Hindari Bahan Ini:</h4>
-            <p class="text-desc text-[16px]">Alcohol-based toners, Harsh exfoliants, Sulfates, Fragrances yang kuat</p>
+            <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">Alcohol-based toners, Harsh exfoliants, Sulfates, Fragrances yang kuat</p>
           </div>
         </div>
       </div>
@@ -371,16 +400,16 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal('kombinasi')">&times;</span>
         <div class="relative">
-          <img src="{{ url_for('static', filename='images/kombinasi.png') }}" alt="Kulit Kombinasi" class="w-full h-64 object-cover rounded-t-[20px]">
+          <img src="{{ url_for('static', filename='images/kombinasi.png') }}" alt="Kulit Kombinasi" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
           <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[36px] text-center">Kulit Kombinasi</h2>
+            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Kombinasi</h2>
           </div>
         </div>
-        <div class="p-8">
+        <div class="p-4 sm:p-6 lg:p-8">
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kombinasi:</h3>
-            <ul class="list-disc pl-5 text-desc text-[18px] space-y-2">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kombinasi:</h3>
+            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
               <li>T-zone (dahi, hidung, dagu) berminyak</li>
               <li>Area pipi cenderung normal atau kering</li>
               <li>Pori-pori besar di T-zone</li>
@@ -390,11 +419,11 @@
           </div>
           
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pembersih:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Gentle foaming cleanser</li>
                   <li>• Low pH cleanser</li>
                   <li>• Micellar water</li>
@@ -403,7 +432,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Toner:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Niacinamide</li>
                   <li>• Hyaluronic Acid</li>
                   <li>• PHA (mild exfoliant)</li>
@@ -412,7 +441,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Serum (Multi-step):</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Niacinamide untuk T-zone</li>
                   <li>• Hyaluronic Acid untuk pipi</li>
                   <li>• Vitamin C (morning)</li>
@@ -421,7 +450,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pelembab:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Lightweight gel (T-zone)</li>
                   <li>• Cream moisturizer (pipi)</li>
                   <li>• Oil-free untuk T-zone</li>
@@ -433,7 +462,7 @@
           
           <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
             <h4 class="font-semibold text-secondary mb-2">💡 Tips Multi-Zone Care:</h4>
-            <p class="text-desc text-[16px]">Gunakan produk yang berbeda untuk area yang berbeda. Aplikasikan produk untuk kulit berminyak di T-zone dan produk untuk kulit kering di area pipi.</p>
+            <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">Gunakan produk yang berbeda untuk area yang berbeda. Aplikasikan produk untuk kulit berminyak di T-zone dan produk untuk kulit kering di area pipi.</p>
           </div>
         </div>
       </div>
@@ -443,16 +472,16 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal('normal')">&times;</span>
         <div class="relative">
-          <img src="{{ url_for('static', filename='images/normal.png') }}" alt="Kulit Normal" class="w-full h-64 object-cover rounded-t-[20px]">
+          <img src="{{ url_for('static', filename='images/normal.png') }}" alt="Kulit Normal" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
           <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[36px] text-center">Kulit Normal</h2>
+            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Normal</h2>
           </div>
         </div>
-        <div class="p-8">
+        <div class="p-4 sm:p-6 lg:p-8">
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Normal:</h3>
-            <ul class="list-disc pl-5 text-desc text-[18px] space-y-2">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Normal:</h3>
+            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
               <li>Produksi sebum seimbang</li>
               <li>Tidak terlalu berminyak atau kering</li>
               <li>Pori-pori hampir tidak terlihat</li>
@@ -462,11 +491,11 @@
           </div>
           
           <div class="mb-6">
-            <h3 class="text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Bahan Skincare yang Direkomendasikan:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pembersih:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Gentle gel cleanser</li>
                   <li>• Foam cleanser</li>
                   <li>• Micellar water</li>
@@ -475,7 +504,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Toner:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Hyaluronic Acid</li>
                   <li>• Rose Water</li>
                   <li>• Vitamin C</li>
@@ -484,7 +513,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Serum:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Vitamin C (morning)</li>
                   <li>• Hyaluronic Acid</li>
                   <li>• Niacinamide</li>
@@ -493,7 +522,7 @@
               </div>
               <div class="bg-[#EAF5F4] p-4 rounded-lg">
                 <h4 class="font-semibold text-secondary mb-2">Pelembab:</h4>
-                <ul class="text-desc text-[16px] space-y-1">
+                <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
                   <li>• Lightweight lotion</li>
                   <li>• Gel-cream hybrid</li>
                   <li>• Ceramides</li>
@@ -505,99 +534,112 @@
           
           <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
             <h4 class="font-semibold text-secondary mb-2">✅ Keuntungan Kulit Normal:</h4>
-            <p class="text-desc text-[16px]">Anda beruntung memiliki kulit normal! Fokus pada maintenance dan perlindungan dari faktor eksternal seperti UV dan polusi.</p>
+            <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">Anda beruntung memiliki kulit normal! Fokus pada maintenance dan perlindungan dari faktor eksternal seperti UV dan polusi.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <section class="mt-20 container mx-auto">
+    <section class="mt-20 px-4 lg:px-0 container mx-auto">
       <div class="relative">
         <div class="relative z-10">
-          <h2 class="text-primary text-[48px] font-bold text-center">Reminder</h2>
-          <p class="text-[#646464] text-center text-[40px] font-[500] my-8">
-            Be good to your skin, you'll wear it </br>
+          <h2 class="text-primary text-[32px] sm:text-[40px] lg:text-[48px] font-bold text-center">Reminder</h2>
+          <p class="text-[#646464] text-center text-[20px] sm:text-[28px] lg:text-[40px] font-[500] my-6 lg:my-8">
+            Be good to your skin, you'll wear it <br class="block sm:hidden" /><br class="hidden sm:block" />
             everyday for the rest of your life
           </p>
           <hr>
-          <p class="text-[32px] text-primary text-center mt-7">Okay!</p>
+          <p class="text-[24px] sm:text-[28px] lg:text-[32px] text-primary text-center mt-7">Okay!</p>
         </div>
         <img
           src="{{ url_for('static', filename='images/Group 7.png') }}"
           alt=""
-          class="absolute bottom-0 right-0 w-[300px] z-0"
+          class="absolute bottom-0 right-0 w-[150px] sm:w-[200px] lg:w-[300px] z-0 hidden sm:block"
         />
       </div>
     </section>
 
-    <footer class="bg-[#EAF5F4] py-10 pt-16 mt-40">
-      <div class="container mx-auto flex justify-between">
-        <div class="flex items-center w-[80px] h-[80px]">
-          <img
-            src="{{ url_for('static', filename='images/logo.png') }}"
-            alt=""
-          />
-          <span class="text-[32px] text-primary font-bold ml-2">
-            CS<span class="text-secondary">kin</span>
-          </spa>
-        </div>
-        <div class="flex flex-col gap-4 text-[#515151]">
-          <h2 class="font-semibold">Menu</h2>
-          <ul class="flex flex-col gap-4 text-[#515151]">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./skintype.html">Skin Type</a></li>
-          </ul>
-        </div>
-        <div class="flex flex-col gap-4 text-[#515151]">
-          <h2 class="font-semibold">Kontak / Hubungi Kami</h2>
-          <ul class="flex flex-col gap-4 text-[#515151]">
-            <li><a href="#">
-              Email : dilalovegood@gmail.com
-            </a></li>
-            <li><a href="#">
-              WhatsApp: +62 812 3456 7890
-            </a></li>
-            <li><a href="#">
-              Instagram: @cskin
-            </a></li>
-          </ul>
-        </div>
-        <div class="flex flex-col gap-4">
-          <a class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2">
-            <span href="#" class="text-white text-base font-semibold">Scan Skin</span>
-            <div
-              class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center"
-            >
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z"
-                  fill="white"
-                />
-              </svg>
+    <footer class="bg-[#EAF5F4] py-10 pt-16 mt-20 lg:mt-40">
+      <div class="container mx-auto px-4 lg:px-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+          <!-- Logo -->
+          <div class="flex items-center justify-center sm:justify-start">
+            <div class="flex items-center w-[60px] h-[60px] lg:w-[80px] lg:h-[80px]">
+              <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt=""
+                class="w-full h-full object-contain"
+              />
             </div>
-          </a>
-          <a class="bg-white rounded-xl px-4 py-2 border border-primary text-center">
-            <span href="#" class="text-primary text-center text-base font-semibold">Konsultasi</span>
-          </a>
+            <span class="text-[24px] lg:text-[32px] text-primary font-bold ml-2">
+              CS<span class="text-secondary">kin</span>
+            </span>
+          </div>
+          
+          <!-- Menu -->
+          <div class="text-center sm:text-left">
+            <h2 class="font-semibold text-[#515151] mb-4">Menu</h2>
+            <ul class="flex flex-col gap-3 text-[#515151]">
+              <li><a href="./index.html" class="hover:text-primary transition-colors">Home</a></li>
+              <li><a href="./about.html" class="hover:text-primary transition-colors">About</a></li>
+              <li><a href="./skintype.html" class="hover:text-primary transition-colors">Skin Type</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact -->
+          <div class="text-center sm:text-left">
+            <h2 class="font-semibold text-[#515151] mb-4">Kontak / Hubungi Kami</h2>
+            <ul class="flex flex-col gap-3 text-[#515151] text-sm lg:text-base">
+              <li><a href="#" class="hover:text-primary transition-colors">
+                Email : dilalovegood@gmail.com
+              </a></li>
+              <li><a href="#" class="hover:text-primary transition-colors">
+                WhatsApp: +62 812 3456 7890
+              </a></li>
+              <li><a href="#" class="hover:text-primary transition-colors">
+                Instagram: @cskin
+              </a></li>
+            </ul>
+          </div>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-col gap-4 items-center sm:items-start">
+            <a href="#" class="flex items-center gap-2 bg-primary rounded-xl px-4 py-2 hover:bg-opacity-90 transition-all w-full sm:w-auto justify-center">
+              <span class="text-white text-base font-semibold">Scan Skin</span>
+              <div class="w-[28px] h-[28px] bg-[#2C9D8F] rounded-full flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32.6562 5.9375V11.875C32.6562 12.0325 32.5937 12.1835 32.4823 12.2948C32.371 12.4062 32.22 12.4688 32.0625 12.4688C31.905 12.4688 31.754 12.4062 31.6427 12.2948C31.5313 12.1835 31.4688 12.0325 31.4688 11.875V6.53125H26.125C25.9675 6.53125 25.8165 6.46869 25.7052 6.35734C25.5938 6.24599 25.5312 6.09497 25.5312 5.9375C25.5312 5.78003 25.5938 5.62901 25.7052 5.51766C25.8165 5.40631 25.9675 5.34375 26.125 5.34375H32.0625C32.22 5.34375 32.371 5.40631 32.4823 5.51766C32.5937 5.62901 32.6562 5.78003 32.6562 5.9375ZM11.875 31.4688H6.53125V26.125C6.53125 25.9675 6.46869 25.8165 6.35734 25.7052C6.24599 25.5938 6.09497 25.5312 5.9375 25.5312C5.78003 25.5312 5.62901 25.5938 5.51766 25.7052C5.40631 25.8165 5.34375 25.9675 5.34375 26.125V32.0625C5.34375 32.22 5.40631 32.371 5.51766 32.4823C5.62901 32.5937 5.78003 32.6562 5.9375 32.6562H11.875C12.0325 32.6562 12.1835 32.5937 12.2948 32.4823C12.4062 32.371 12.4688 32.22 12.4688 32.0625C12.4688 31.905 12.4062 31.754 12.2948 31.6427C12.1835 31.5313 12.0325 31.4688 11.875 31.4688ZM32.0625 25.5312C31.905 25.5312 31.754 25.5938 31.6427 25.7052C31.5313 25.8165 31.4688 25.9675 31.4688 26.125V31.4688H26.125C25.9675 31.4688 25.8165 31.5313 25.7052 31.6427C25.5938 31.754 25.5312 31.905 25.5312 32.0625C25.5312 32.22 25.5938 32.371 25.7052 32.4823C25.8165 32.5937 25.9675 32.6562 26.125 32.6562H32.0625C32.22 32.6562 32.371 32.5937 32.4823 32.4823C32.5937 32.371 32.6562 32.22 32.6562 32.0625V26.125C32.6562 25.9675 32.5937 25.8165 32.4823 25.7052C32.371 25.5938 32.22 25.5312 32.0625 25.5312ZM5.9375 12.4688C6.09497 12.4688 6.24599 12.4062 6.35734 12.2948C6.46869 12.1835 6.53125 12.0325 6.53125 11.875V6.53125H11.875C12.0325 6.53125 12.1835 6.46869 12.2948 6.35734C12.4062 6.24599 12.4688 6.09497 12.4688 5.9375C12.4688 5.78003 12.4062 5.62901 12.2948 5.51766C12.1835 5.40631 12.0325 5.34375 11.875 5.34375H5.9375C5.78003 5.34375 5.62901 5.40631 5.51766 5.51766C5.40631 5.62901 5.34375 5.78003 5.34375 5.9375V11.875C5.34375 12.0325 5.40631 12.1835 5.51766 12.2948C5.62901 12.4062 5.78003 12.4688 5.9375 12.4688ZM11.875 11.2812H26.125C26.2825 11.2812 26.4335 11.3438 26.5448 11.4552C26.6562 11.5665 26.7188 11.7175 26.7188 11.875V26.125C26.7188 26.2825 26.6562 26.4335 26.5448 26.5448C26.4335 26.6562 26.2825 26.7188 26.125 26.7188H11.875C11.7175 26.7188 11.5665 26.6562 11.4552 26.5448C11.3438 26.4335 11.2812 26.2825 11.2812 26.125V11.875C11.2812 11.7175 11.3438 11.5665 11.4552 11.4552C11.5665 11.3438 11.7175 11.2812 11.875 11.2812ZM12.4688 25.5312H25.5312V12.4688H12.4688V25.5312Z" fill="white"/>
+                </svg>
+              </div>
+            </a>
+            <a href="#" class="bg-white rounded-xl px-4 py-2 border border-primary text-center hover:bg-primary hover:text-white transition-all w-full sm:w-auto">
+              <span class="text-primary hover:text-white text-base font-semibold">Konsultasi</span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="container mx-auto mt-20">
-        <hr>
-        <div class="text-center justify-between flex mt-5">
-          <p class="text-[#515151] text-sm font-normal">© 2023 CSKIN. All rights reserved.</p>
-          <p class="text-[#515151] text-sm font-normal">Terms of Service | Privacy Policy</p>
+        
+        <div class="mt-12 lg:mt-20">
+          <hr>
+          <div class="flex flex-col sm:flex-row justify-between items-center mt-5 gap-4">
+            <p class="text-[#515151] text-sm font-normal text-center sm:text-left">© 2023 CSKIN. All rights reserved.</p>
+            <p class="text-[#515151] text-sm font-normal text-center sm:text-right">Terms of Service | Privacy Policy</p>
+          </div>
         </div>
       </div>
     </footer>
 
     <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Modal functionality
       function openModal(skinType) {
         const modal = document.getElementById('modal' + skinType.charAt(0).toUpperCase() + skinType.slice(1));
         modal.classList.add('show');
