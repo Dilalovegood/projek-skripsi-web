@@ -54,41 +54,61 @@ def save_uploaded_image(image_data, is_base64=False):
 def predict():
     """Handle image prediction"""
     try:
+        print(f"🔄 Received prediction request")
+        print(f"Content-Type: {request.content_type}")
+        print(f"Request files: {list(request.files.keys()) if request.files else 'None'}")
+        print(f"Request JSON: {bool(request.json)}")
+        
         saved_filename = None
         
         # Check if image is uploaded via file or base64
         if 'image' in request.files:
+            print("📁 Processing file upload...")
             # File upload
             file = request.files['image']
             if file.filename == '':
+                print("❌ No file selected")
                 return jsonify({'error': 'No file selected'}), 400
             
             if file and allowed_file(file.filename):
+                print(f"✅ Valid file: {file.filename}")
                 # Save uploaded image
                 saved_filename = save_uploaded_image(file.stream)
+                if not saved_filename:
+                    return jsonify({'error': 'Failed to save image'}), 500
                 
                 # Reset file pointer for prediction
                 file.stream.seek(0)
                 
                 # Get prediction
+                print("🔄 Getting prediction...")
                 result = get_prediction(Image.open(file.stream))
                 
             else:
+                print(f"❌ Invalid file type: {file.filename}")
                 return jsonify({'error': 'Invalid file type'}), 400
                 
-        elif 'image_data' in request.json:
+        elif request.json and 'image_data' in request.json:
+            print("📷 Processing base64 image...")
             # Base64 image data (from camera)
             image_data = request.json['image_data']
             
             # Save captured image
             saved_filename = save_uploaded_image(image_data, is_base64=True)
+            if not saved_filename:
+                return jsonify({'error': 'Failed to save image'}), 500
             
             # Get prediction
+            print("🔄 Getting prediction...")
             result = get_prediction(image_data)
         else:
+            print("❌ No image provided in request")
             return jsonify({'error': 'No image provided'}), 400
         
+        print(f"🔄 Prediction result: {result}")
+        
         if result.get('error'):
+            print(f"❌ Prediction error: {result['error']}")
             return jsonify(result), 500
         
         # Store result in session for result page
@@ -102,9 +122,13 @@ def predict():
         
         # Return result with image filename
         result['image_filename'] = saved_filename
+        print(f"✅ Prediction successful: {result['predicted_class']}")
         return jsonify(result)
             
     except Exception as e:
+        print(f"❌ Exception in predict endpoint: {e}")
+        import traceback
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
 @scan_bp.route('/result')

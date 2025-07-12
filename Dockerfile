@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
@@ -27,6 +27,9 @@ COPY . .
 
 # Create necessary directories
 RUN mkdir -p uploads models app/static/uploads
+
+# Copy model file (make sure vit_model.pth exists)
+COPY models/vit_model.pth ./models/
 
 # Create models/.gitkeep if it doesn't exist
 RUN touch models/.gitkeep

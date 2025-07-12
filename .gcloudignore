@@ -1,0 +1,47 @@
+# gcloudignore file untuk Google Cloud Build
+# File ini menentukan file mana yang akan di-upload ke Cloud Build
+
+# Git files
+.git/
+.gitignore
+
+# Development files
+README.md
+.DS_Store
+Thumbs.db
+*.md
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env
+
+# Logs and temp files
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing
+.pytest_cache/
+.coverage
+.tox/
+
+# PENTING: JANGAN exclude models/ 
+# Kita INGIN models/vit_model.pth ter-upload ke Cloud Build
+# !models/
+# !models/vit_model.pth
+
+# Uploads directory (tidak perlu)
+app/static/uploads/*
+!app/static/uploads/.gitkeep

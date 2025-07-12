@@ -78,14 +78,43 @@ class SkinTypePredictor:
                 self.model = timm.create_model('vit_base_patch16_224', 
                                              pretrained=False, 
                                              num_classes=len(self.class_names))
-                self.model.load_state_dict(state_dict, strict=False)
+                
+                # Try to load state dict with strict=False to allow for differences
+                missing_keys, unexpected_keys = self.model.load_state_dict(state_dict, strict=False)
+                
+                if missing_keys:
+                    print(f"Missing keys: {missing_keys[:5]}...")  # Show first 5
+                if unexpected_keys:
+                    print(f"Unexpected keys: {unexpected_keys[:5]}...")  # Show first 5
+                
+                # Check if the head layer loaded correctly
+                if any('head' in key for key in missing_keys):
+                    print("Head layer not loaded correctly, checking architecture...")
+                    
+                    # Look for alternative head structures
+                    head_weight_key = None
+                    for key in state_dict.keys():
+                        if 'head' in key and 'weight' in key:
+                            head_weight_key = key
+                            break
+                    
+                    if head_weight_key:
+                        head_shape = state_dict[head_weight_key].shape
+                        detected_classes = head_shape[0]
+                        print(f"Detected {detected_classes} classes from model head")
+                        
+                        if detected_classes != len(self.class_names):
+                            print(f"Model has {detected_classes} classes, but we need {len(self.class_names)}")
+                            # Replace head layer to match our class count
+                            self.model.head = nn.Linear(self.model.head.in_features, len(self.class_names))
+                            print("Replaced head layer with correct number of classes")
                 
             except Exception as e1:
                 print(f"Standard ViT failed: {e1}")
                 
                 try:
-                    # Method 2: Try with different num_classes
-                    print("Trying with different num_classes...")
+                    # Method 2: Try with different num_classes detected from model
+                    print("Trying with auto-detected num_classes...")
                     
                     # Inspect the head layer to determine num_classes
                     head_weight_key = None
@@ -176,12 +205,23 @@ class SkinTypePredictor:
     def predict(self, image):
         """Make prediction on image"""
         try:
+            print(f"🔄 Starting prediction with image type: {type(image)}")
+            
+            # Validate model is loaded
+            if self.model is None:
+                raise Exception("Model not loaded")
+            
             # Preprocess image
+            print("🔄 Preprocessing image...")
             input_tensor = self.preprocess_image(image)
+            print(f"✅ Image preprocessed, tensor shape: {input_tensor.shape}")
             
             # Make prediction
+            print("🔄 Running model inference...")
             with torch.no_grad():
                 outputs = self.model(input_tensor)
+                print(f"✅ Model outputs shape: {outputs.shape}")
+                
                 probabilities = torch.nn.functional.softmax(outputs, dim=1)
                 confidence, predicted = torch.max(probabilities, 1)
                 
@@ -190,18 +230,20 @@ class SkinTypePredictor:
                 
                 result = {
                     'predicted_class': self.class_names[predicted.item()],
-                    'confidence': confidence.item(),
+                    'confidence': float(confidence.item()),
                     'probabilities': {
                         self.class_names[i]: float(prob) 
                         for i, prob in enumerate(all_probs)
                     }
                 }
                 
-                print(f"Prediction: {result['predicted_class']} ({result['confidence']:.3f})")
+                print(f"✅ Prediction complete: {result['predicted_class']} ({result['confidence']:.3f})")
                 return result
                 
         except Exception as e:
-            print(f"Error in prediction: {e}")
+            print(f"❌ Error in prediction: {e}")
+            import traceback
+            traceback.print_exc()
             return {
                 'error': str(e),
                 'predicted_class': 'normal',  # fallback
@@ -212,21 +254,55 @@ class SkinTypePredictor:
 # Global predictor instance
 predictor = None
 
+def is_model_loaded():
+    """Check if model is loaded and ready"""
+    global predictor
+    return predictor is not None and predictor.model is not None
+
 def initialize_model(model_path):
     """Initialize the global predictor - works with both .pt and .pth"""
     global predictor
     try:
+        print(f"🔄 Initializing model from: {model_path}")
+        if not os.path.exists(model_path):
+            print(f"❌ Model file not found: {model_path}")
+            return False
+            
         predictor = SkinTypePredictor(model_path)
+        print(f"✅ Model initialized successfully")
         return True
     except Exception as e:
-        print(f"Failed to initialize model: {e}")
+        print(f"❌ Failed to initialize model: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 def get_prediction(image):
     """Get prediction from global predictor"""
-    if predictor is None:
-        return {'error': 'Model not initialized'}
-    return predictor.predict(image)
+    try:
+        if predictor is None:
+            print("❌ Model not initialized")
+            return {'error': 'Model not initialized'}
+        
+        if predictor.model is None:
+            print("❌ Model object is None")
+            return {'error': 'Model object not loaded'}
+        
+        print(f"🔄 Making prediction with image type: {type(image)}")
+        result = predictor.predict(image)
+        print(f"✅ Prediction completed: {result.get('predicted_class', 'error')}")
+        return result
+        
+    except Exception as e:
+        print(f"❌ Error in get_prediction: {e}")
+        import traceback
+        traceback.print_exc()
+        return {
+            'error': f'Prediction failed: {str(e)}',
+            'predicted_class': 'normal',  # fallback
+            'confidence': 0.5,
+            'probabilities': {'berminyak': 0.25, 'kering': 0.25, 'kombinasi': 0.25, 'normal': 0.25}
+        }
 
 def find_model_file(model_dir):
     """Find model file in directory (supports both .pt and .pth)"""

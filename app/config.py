@@ -36,6 +36,11 @@ class Config:
     MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'models')
     MODEL_PATH = get_model_path()
     
+    # For production, ensure model exists
+    if not MODEL_PATH:
+        print("⚠️ No model file found, using default path")
+        MODEL_PATH = os.path.join(MODEL_DIR, 'vit_model.pth')
+    
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size
     
