@@ -23,9 +23,19 @@ class Config:
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size
     
+    # Ensure upload directory exists
+    if not os.path.exists(UPLOAD_FOLDER):
+        try:
+            os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+            print(f"📁 Created upload directory: {UPLOAD_FOLDER}")
+        except Exception as e:
+            print(f"❌ Failed to create upload directory: {e}")
+    else:
+        print(f"✅ Upload directory exists: {UPLOAD_FOLDER}")
+    
     # Session configuration
     SESSION_TYPE = 'filesystem'
     PERMANENT_SESSION_LIFETIME = 1800  # 30 minutes
     
-    # Allowed extensions
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    # Allowed extensions - expanded for better compatibility
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'tiff'}

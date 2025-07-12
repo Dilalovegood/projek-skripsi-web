@@ -11,43 +11,93 @@ from app.service.model_handler import get_prediction
 scan_bp = Blueprint('scan', __name__)
 
 def allowed_file(filename):
+    """Check if file extension is allowed"""
+    if not filename:
+        return False
+    
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
+
+def get_file_extension(filename):
+    """Get file extension from filename"""
+    if not filename or '.' not in filename:
+        return None
+    return filename.rsplit('.', 1)[1].lower()
 
 def save_uploaded_image(image_data, is_base64=False):
     """Save uploaded image and return filename"""
     try:
+        # Ensure upload directory exists
+        upload_dir = current_app.config['UPLOAD_FOLDER']
+        if not os.path.exists(upload_dir):
+            os.makedirs(upload_dir, exist_ok=True)
+            print(f"📁 Created upload directory: {upload_dir}")
+        
         # Generate unique filename
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         unique_id = str(uuid.uuid4())[:8]
         filename = f"scan_{timestamp}_{unique_id}.jpg"
-        filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        filepath = os.path.join(upload_dir, filename)
+        
+        print(f"💾 Saving image to: {filepath}")
         
         if is_base64:
             # Handle base64 image
-            if image_data.startswith('data:image'):
-                image_data = image_data.split(',')[1]
-            
-            image_bytes = base64.b64decode(image_data)
-            image = Image.open(io.BytesIO(image_bytes))
+            if isinstance(image_data, str):
+                if image_data.startswith('data:image'):
+                    image_data = image_data.split(',')[1]
+                
+                image_bytes = base64.b64decode(image_data)
+                image = Image.open(io.BytesIO(image_bytes))
+            else:
+                raise ValueError("Base64 data must be string")
         else:
-            # Handle file upload
-            image = Image.open(image_data)
+            # Handle file upload or BytesIO
+            if isinstance(image_data, io.BytesIO):
+                image_data.seek(0)  # Reset position
+                image = Image.open(image_data)
+            elif hasattr(image_data, 'read'):
+                # For file streams from request.files
+                image_data.seek(0)  # Reset position
+                image = Image.open(image_data)
+            elif hasattr(image_data, 'stream'):
+                # For werkzeug FileStorage objects
+                image_data.stream.seek(0)
+                image = Image.open(image_data.stream)
+            else:
+                # Direct PIL Image or other formats
+                image = Image.open(image_data)
         
         # Convert to RGB if necessary
         if image.mode != 'RGB':
             image = image.convert('RGB')
         
+        # Get original size
+        original_size = image.size
+        print(f"📏 Original image size: {original_size}")
+        
         # Resize image for storage (optional, to save space)
-        image.thumbnail((800, 800), Image.Resampling.LANCZOS)
+        max_size = 1024
+        if max(original_size) > max_size:
+            image.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
+            print(f"📐 Resized image to: {image.size}")
         
-        # Save image
-        image.save(filepath, 'JPEG', quality=85)
+        # Save image with good quality
+        image.save(filepath, 'JPEG', quality=90, optimize=True)
         
-        return filename
+        # Check file was saved successfully
+        if os.path.exists(filepath):
+            file_size = os.path.getsize(filepath)
+            print(f"✅ Image saved successfully: {filename} ({file_size} bytes)")
+            return filename
+        else:
+            print(f"❌ Failed to save image: {filepath}")
+            return None
         
     except Exception as e:
-        print(f"Error saving image: {e}")
+        print(f"❌ Error saving image: {e}")
+        import traceback
+        traceback.print_exc()
         return None
 
 @scan_bp.route('/predict', methods=['POST'])
@@ -69,7 +119,7 @@ def predict():
                 
                 if json_data and 'image_data' in json_data:
                     image_data = json_data['image_data']
-                    print(f"📄 Processing JSON base64 data")
+                    print(f"📄 Processing JSON base64 data (length: {len(image_data)})")
                     
                     # Handle data URL format
                     if image_data.startswith('data:image'):
@@ -80,8 +130,13 @@ def predict():
                     image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
                     image_source = "json_base64"
                     
+                    # Save the image
+                    saved_filename = save_uploaded_image(json_data['image_data'], is_base64=True)
+                    
             except Exception as e:
                 print(f"❌ Error processing JSON: {e}")
+                import traceback
+                traceback.print_exc()
         
         # Method 2: Form data dengan file upload (Content-Type: multipart/form-data)
         elif 'multipart/form-data' in str(request.content_type):
@@ -92,22 +147,54 @@ def predict():
             # Check for file upload
             if 'image' in request.files:
                 file = request.files['image']
-                if file and file.filename != '':
+                if file and file.filename != '' and allowed_file(file.filename):
                     print(f"📁 Processing uploaded file: {file.filename}")
-                    image = Image.open(file.stream).convert('RGB')
-                    image_source = "file_upload"
+                    try:
+                        # Process the image
+                        image = Image.open(file.stream).convert('RGB')
+                        image_source = "file_upload"
+                        
+                        # Save the image - pass the file object directly
+                        saved_filename = save_uploaded_image(file, is_base64=False)
+                        
+                    except Exception as e:
+                        print(f"❌ Error processing uploaded file: {e}")
+                        return jsonify({
+                            'success': False,
+                            'error': f'Invalid image file: {str(e)}',
+                            'image_source': 'file_upload_error'
+                        }), 400
+                else:
+                    print(f"❌ Invalid file upload: {file.filename if file else 'No file'}")
+                    return jsonify({
+                        'success': False,
+                        'error': 'No valid image file provided',
+                        'image_source': 'file_upload_invalid'
+                    }), 400
             
             # Check for base64 in form data
             elif 'image_data' in request.form:
                 image_data = request.form['image_data']
-                print(f"📝 Processing form base64 data")
+                print(f"📝 Processing form base64 data (length: {len(image_data)})")
                 
-                if image_data.startswith('data:image'):
-                    image_data = image_data.split(',')[1]
-                
-                image_bytes = base64.b64decode(image_data)
-                image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
-                image_source = "form_base64"
+                try:
+                    if image_data.startswith('data:image'):
+                        image_data = image_data.split(',')[1]
+                    
+                    image_bytes = base64.b64decode(image_data)
+                    image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+                    image_source = "form_base64"
+                    
+                    # Save the image
+                    saved_filename = save_uploaded_image(request.form['image_data'], is_base64=True)
+                    
+                except Exception as e:
+                    print(f"❌ Error processing form base64: {e}")
+                    return jsonify({
+                        'success': False,
+                        'error': f'Invalid base64 image data: {str(e)}',
+                        'image_source': 'form_base64_error'
+                    }), 400
         
         # Method 3: Raw form data (Content-Type: application/x-www-form-urlencoded)
         elif 'application/x-www-form-urlencoded' in str(request.content_type):
@@ -116,21 +203,45 @@ def predict():
             
             if 'image_data' in request.form:
                 image_data = request.form['image_data']
-                print(f"📝 Processing URL-encoded base64 data")
+                print(f"📝 Processing URL-encoded base64 data (length: {len(image_data)})")
                 
-                if image_data.startswith('data:image'):
-                    image_data = image_data.split(',')[1]
-                
-                image_bytes = base64.b64decode(image_data)
-                image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
-                image_source = "urlencoded_base64"
+                try:
+                    if image_data.startswith('data:image'):
+                        image_data = image_data.split(',')[1]
+                    
+                    image_bytes = base64.b64decode(image_data)
+                    image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+                    image_source = "urlencoded_base64"
+                    
+                    # Save the image
+                    saved_filename = save_uploaded_image(request.form['image_data'], is_base64=True)
+                    
+                except Exception as e:
+                    print(f"❌ Error processing URL-encoded base64: {e}")
+                    return jsonify({
+                        'success': False,
+                        'error': f'Invalid URL-encoded image data: {str(e)}',
+                        'image_source': 'urlencoded_error'
+                    }), 400
         
         # Method 4: Raw binary data (Content-Type: image/*)
         elif request.content_type and request.content_type.startswith('image/'):
             print(f"🖼️ Processing raw image data")
-            image_data = request.get_data()
-            image = Image.open(io.BytesIO(image_data)).convert('RGB')
-            image_source = "raw_image"
+            try:
+                image_data = request.get_data()
+                image = Image.open(io.BytesIO(image_data)).convert('RGB')
+                image_source = "raw_image"
+                
+                # Save the image
+                saved_filename = save_uploaded_image(io.BytesIO(image_data), is_base64=False)
+                
+            except Exception as e:
+                print(f"❌ Error processing raw image: {e}")
+                return jsonify({
+                    'success': False,
+                    'error': f'Invalid raw image data: {str(e)}',
+                    'image_source': 'raw_image_error'
+                }), 400
         
         # Method 5: Try to parse any remaining data as JSON
         else:
@@ -144,7 +255,7 @@ def predict():
                     
                     if 'image_data' in json_data:
                         image_data = json_data['image_data']
-                        print(f"📄 Processing fallback JSON base64 data")
+                        print(f"📄 Processing fallback JSON base64 data (length: {len(image_data)})")
                         
                         if image_data.startswith('data:image'):
                             image_data = image_data.split(',')[1]
@@ -152,6 +263,9 @@ def predict():
                         image_bytes = base64.b64decode(image_data)
                         image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
                         image_source = "fallback_json"
+                        
+                        # Save the image
+                        saved_filename = save_uploaded_image(json_data['image_data'], is_base64=True)
                         
             except Exception as e:
                 print(f"❌ Fallback JSON parsing failed: {e}")
@@ -172,9 +286,10 @@ def predict():
             }), 400
         
         print(f"✅ Image loaded from {image_source}: {image.size}")
+        if saved_filename:
+            print(f"✅ Image saved as: {saved_filename}")
         
         # Make prediction
-        from app.service.model_handler import get_prediction
         result = get_prediction(image)
         
         # Check if prediction was successful
@@ -186,16 +301,29 @@ def predict():
                 'predicted_class': result.get('predicted_class', 'normal'),
                 'confidence': result.get('confidence', 0.5),
                 'probabilities': result.get('probabilities', {}),
-                'image_source': image_source
+                'image_source': image_source,
+                'image_filename': saved_filename
             }), 500
         else:
             print(f"✅ Prediction successful: {result['predicted_class']}")
+            
+            # Store result in session for result page
+            session['last_prediction'] = {
+                'predicted_class': result['predicted_class'],
+                'confidence': result['confidence'],
+                'probabilities': result['probabilities'],
+                'image_filename': saved_filename,
+                'image_source': image_source,
+                'timestamp': datetime.now().isoformat()
+            }
+            
             return jsonify({
                 'success': True,
                 'predicted_class': result['predicted_class'],
                 'confidence': result['confidence'],
                 'probabilities': result['probabilities'],
-                'image_source': image_source
+                'image_source': image_source,
+                'image_filename': saved_filename
             })
             
     except Exception as e:
@@ -211,7 +339,7 @@ def predict():
             'probabilities': {'berminyak': 0.25, 'kering': 0.25, 'kombinasi': 0.25, 'normal': 0.25}
         }), 500
     
-    
+
 @scan_bp.route('/result')
 def result():
     """Show prediction result page"""
