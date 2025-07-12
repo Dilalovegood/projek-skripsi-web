@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: scanskin-app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PORT
+        value: 5000
+    healthCheckPath: /
+    disk:
+      name: scanskin-disk
+      mountPath: /app/app/static/uploads
+      sizeGB: 1

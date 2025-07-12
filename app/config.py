@@ -30,7 +30,7 @@ def get_model_path():
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'your-secret-key-here-change-in-production'
-    DEBUG = True
+    DEBUG = os.environ.get('FLASK_ENV') != 'production'
     
     # Model configuration - auto-detect .pt or .pth
     MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'models')
