@@ -39,138 +39,110 @@ class SkinTypePredictor:
         ])
     
     def load_model(self):
-        """Load the Vision Transformer model (.pt or .pth)"""
+        """Load the vit_model.pth specifically"""
         try:
-            print(f"Loading model from: {self.model_path}")
+            print(f"🔄 Loading vit_model.pth from: {self.model_path}")
             
-            # Load checkpoint first to inspect structure
+            # Check file exists and get size
+            if not os.path.exists(self.model_path):
+                raise FileNotFoundError(f"vit_model.pth not found at: {self.model_path}")
+            
+            file_size = os.path.getsize(self.model_path) / (1024 * 1024)  # MB
+            print(f"📊 Model file size: {file_size:.2f} MB")
+            
+            # Load checkpoint
+            print("🔄 Loading checkpoint...")
             checkpoint = torch.load(self.model_path, map_location=self.device)
             
-            # Debug: print checkpoint structure
+            # Debug checkpoint structure
             if isinstance(checkpoint, dict):
-                print(f"Checkpoint keys: {list(checkpoint.keys())}")
-                
-                # Try to extract state_dict
-                if 'model_state_dict' in checkpoint:
-                    state_dict = checkpoint['model_state_dict']
-                elif 'state_dict' in checkpoint:
-                    state_dict = checkpoint['state_dict']
-                elif 'model' in checkpoint:
-                    state_dict = checkpoint['model']
-                else:
-                    state_dict = checkpoint
+                print(f"📋 Checkpoint keys: {list(checkpoint.keys())}")
+                state_dict = checkpoint
             else:
                 state_dict = checkpoint
             
-            # Print some keys to understand structure
-            if isinstance(state_dict, dict):
-                sample_keys = list(state_dict.keys())[:10]
-                print(f"Sample state_dict keys: {sample_keys}")
-                
-                # Check if it's a multi-head model
-                head_keys = [k for k in state_dict.keys() if 'head' in k]
-                print(f"Head keys found: {head_keys}")
+            # Check if it's the expected ViT structure
+            sample_keys = list(state_dict.keys())[:5]
+            print(f"🔍 Sample keys: {sample_keys}")
             
-            # Try different model architectures based on the keys
-            try:
-                # Method 1: Try standard ViT
-                print("Trying standard ViT architecture...")
+            # Look for head structure to determine classes
+            head_keys = [k for k in state_dict.keys() if 'head' in k.lower()]
+            print(f"🎯 Head keys found: {head_keys}")
+            
+            # Create the model based on your vit_model.pth structure
+            print("🏗️ Creating ViT model...")
+            
+            # Based on your logs, it seems to be a standard ViT with custom head
+            if any('heads.head.1.weight' in k for k in state_dict.keys()):
+                print("🔧 Detected custom head structure (heads.head.1)")
+                
+                # Create base ViT model
                 self.model = timm.create_model('vit_base_patch16_224', 
                                              pretrained=False, 
                                              num_classes=len(self.class_names))
                 
-                # Try to load state dict with strict=False to allow for differences
+                # Modify head to match the checkpoint structure
+                # Your model seems to have heads.head.1 structure
+                self.model.head = nn.Sequential(
+                    nn.Dropout(0.1),
+                    nn.Linear(768, len(self.class_names))  # ViT-B has 768 features
+                )
+                
+                # Load state dict with custom mapping
+                model_state = {}
+                for key, value in state_dict.items():
+                    if key.startswith('heads.head.1'):
+                        # Map heads.head.1.weight -> head.1.weight
+                        new_key = key.replace('heads.head.1', 'head.1')
+                        model_state[new_key] = value
+                    else:
+                        model_state[key] = value
+                
+                # Load with strict=False to handle any mismatches
+                missing_keys, unexpected_keys = self.model.load_state_dict(model_state, strict=False)
+                
+                if missing_keys:
+                    print(f"⚠️ Missing keys: {len(missing_keys)}")
+                if unexpected_keys:
+                    print(f"⚠️ Unexpected keys: {len(unexpected_keys)}")
+                
+            else:
+                # Standard ViT loading
+                print("🔧 Using standard ViT loading")
+                self.model = timm.create_model('vit_base_patch16_224', 
+                                             pretrained=False, 
+                                             num_classes=len(self.class_names))
+                
+                # Try to load state dict
                 missing_keys, unexpected_keys = self.model.load_state_dict(state_dict, strict=False)
                 
                 if missing_keys:
-                    print(f"Missing keys: {missing_keys[:5]}...")  # Show first 5
-                if unexpected_keys:
-                    print(f"Unexpected keys: {unexpected_keys[:5]}...")  # Show first 5
-                
-                # Check if the head layer loaded correctly
-                if any('head' in key for key in missing_keys):
-                    print("Head layer not loaded correctly, checking architecture...")
-                    
-                    # Look for alternative head structures
-                    head_weight_key = None
-                    for key in state_dict.keys():
-                        if 'head' in key and 'weight' in key:
-                            head_weight_key = key
-                            break
-                    
-                    if head_weight_key:
-                        head_shape = state_dict[head_weight_key].shape
-                        detected_classes = head_shape[0]
-                        print(f"Detected {detected_classes} classes from model head")
-                        
-                        if detected_classes != len(self.class_names):
-                            print(f"Model has {detected_classes} classes, but we need {len(self.class_names)}")
-                            # Replace head layer to match our class count
-                            self.model.head = nn.Linear(self.model.head.in_features, len(self.class_names))
-                            print("Replaced head layer with correct number of classes")
-                
-            except Exception as e1:
-                print(f"Standard ViT failed: {e1}")
-                
-                try:
-                    # Method 2: Try with different num_classes detected from model
-                    print("Trying with auto-detected num_classes...")
-                    
-                    # Inspect the head layer to determine num_classes
-                    head_weight_key = None
-                    for key in state_dict.keys():
-                        if 'head' in key and 'weight' in key:
-                            head_weight_key = key
-                            break
-                    
-                    if head_weight_key:
-                        head_shape = state_dict[head_weight_key].shape
-                        num_classes = head_shape[0]
-                        print(f"Detected num_classes from model: {num_classes}")
-                        
-                        self.model = timm.create_model('vit_base_patch16_224', 
-                                                     pretrained=False, 
-                                                     num_classes=num_classes)
-                        self.model.load_state_dict(state_dict, strict=False)
-                        
-                        # If num_classes is different, add a mapping layer
-                        if num_classes != len(self.class_names):
-                            print(f"Adding mapping layer: {num_classes} -> {len(self.class_names)}")
-                            self.model.head = nn.Linear(self.model.head.in_features, len(self.class_names))
-                    else:
-                        raise Exception("Could not determine model structure")
-                        
-                except Exception as e2:
-                    print(f"Alternative loading failed: {e2}")
-                    
-                    # Method 3: Try to load the entire model directly
-                    print("Trying to load entire model...")
-                    if isinstance(checkpoint, dict) and 'model' in checkpoint:
-                        self.model = checkpoint['model']
-                    else:
-                        # Last resort: create a minimal working model
-                        print("Creating minimal model...")
-                        self.model = timm.create_model('vit_base_patch16_224', 
-                                                     pretrained=True, 
-                                                     num_classes=len(self.class_names))
-            
-            self.model.to(self.device)
+                    print(f"⚠️ Missing keys: {len(missing_keys)}")
+                    # Reinitialize head if needed
+                    if any('head' in key for key in missing_keys):
+                        print("🔄 Reinitializing head layer...")
+                        self.model.head = nn.Linear(768, len(self.class_names))
+        
+            # Set model to evaluation mode
             self.model.eval()
-            print(f"✅ Model loaded successfully on {self.device}")
+            self.model.to(self.device)
             
+            print(f"✅ vit_model.pth loaded successfully on {self.device}")
+            
+            # Test model with dummy input
+            print("🧪 Testing model with dummy input...")
+            dummy_input = torch.randn(1, 3, 224, 224).to(self.device)
+            with torch.no_grad():
+                test_output = self.model(dummy_input)
+                print(f"✅ Model test successful - output shape: {test_output.shape}")
+        
         except Exception as e:
-            print(f"❌ Error loading model: {e}")
-            print(f"Model path: {self.model_path}")
-            print(f"Device: {self.device}")
+            print(f"❌ Error loading vit_model.pth: {e}")
+            import traceback
+            traceback.print_exc()
             
-            # Fallback: create a pretrained model for testing
-            print("🔄 Loading fallback pretrained model for testing...")
-            self.model = timm.create_model('vit_base_patch16_224', 
-                                         pretrained=True, 
-                                         num_classes=len(self.class_names))
-            self.model.to(self.device)
-            self.model.eval()
-            print("⚠️  Using pretrained model as fallback")
+            # Don't create fallback model in production
+            raise Exception(f"Failed to load vit_model.pth: {e}")
     
     def preprocess_image(self, image):
         """Preprocess image for prediction"""
@@ -259,20 +231,34 @@ def is_model_loaded():
     global predictor
     return predictor is not None and predictor.model is not None
 
-def initialize_model(model_path):
-    """Initialize the global predictor - works with both .pt and .pth"""
+def initialize_model(model_path=None):
+    """Initialize the global predictor with vit_model.pth"""
     global predictor
     try:
-        print(f"🔄 Initializing model from: {model_path}")
+        # Use default path if none provided
+        if model_path is None:
+            from app.config import Config
+            model_path = Config.MODEL_PATH
+        
+        print(f"🔄 Initializing vit_model.pth from: {model_path}")
+        
+        # Validate the specific model file
         if not os.path.exists(model_path):
-            print(f"❌ Model file not found: {model_path}")
-            return False
+            raise FileNotFoundError(f"vit_model.pth not found at: {model_path}")
+        
+        if not model_path.endswith('vit_model.pth'):
+            print(f"⚠️ Warning: Expected vit_model.pth but got: {os.path.basename(model_path)}")
             
-        predictor = SkinTypePredictor(model_path)
-        print(f"✅ Model initialized successfully")
+        # Force CPU for Cloud Run stability
+        device = torch.device('cpu')
+        print(f"🖥️ Using device: {device}")
+        
+        predictor = SkinTypePredictor(model_path, device=device)
+        print(f"✅ vit_model.pth initialized successfully")
         return True
+        
     except Exception as e:
-        print(f"❌ Failed to initialize model: {e}")
+        print(f"❌ Failed to initialize vit_model.pth: {e}")
         import traceback
         traceback.print_exc()
         return False

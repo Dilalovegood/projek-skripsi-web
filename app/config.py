@@ -1,45 +1,24 @@
 import os
 
-def get_model_path():
-    """Find model file in models directory"""
-    model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'models')
-    
-    # Look for specific filenames first
-    preferred_names = [
-        'vit_model.pth',
-        'skin_type_model.pt',
-        'skin_type_model.pth',
-        'model.pt', 
-        'model.pth',
-        'best_model.pt',
-        'best_model.pth'
-    ]
-    
-    for name in preferred_names:
-        path = os.path.join(model_dir, name)
-        if os.path.exists(path):
-            return path
-    
-    # If no preferred names found, look for any .pt or .pth file
-    if os.path.exists(model_dir):
-        for file in os.listdir(model_dir):
-            if file.endswith(('.pt', '.pth')):
-                return os.path.join(model_dir, file)
-    
-    return None
-
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'your-secret-key-here-change-in-production'
     DEBUG = os.environ.get('FLASK_ENV') != 'production'
     
-    # Model configuration - auto-detect .pt or .pth
+    # Model configuration - direct path to vit_model.pth
     MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'models')
-    MODEL_PATH = get_model_path()
+    MODEL_PATH = os.path.join(MODEL_DIR, 'vit_model.pth')
     
-    # For production, ensure model exists
-    if not MODEL_PATH:
-        print("⚠️ No model file found, using default path")
-        MODEL_PATH = os.path.join(MODEL_DIR, 'vit_model.pth')
+    # Validate model exists
+    if not os.path.exists(MODEL_PATH):
+        print(f"⚠️ Model file not found at: {MODEL_PATH}")
+        print(f"📁 Looking in directory: {MODEL_DIR}")
+        if os.path.exists(MODEL_DIR):
+            files = os.listdir(MODEL_DIR)
+            print(f"📄 Files found: {files}")
+        else:
+            print(f"❌ Model directory doesn't exist: {MODEL_DIR}")
+    else:
+        print(f"✅ Model found at: {MODEL_PATH}")
     
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size

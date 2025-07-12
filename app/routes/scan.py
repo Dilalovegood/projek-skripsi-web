@@ -52,85 +52,166 @@ def save_uploaded_image(image_data, is_base64=False):
 
 @scan_bp.route('/predict', methods=['POST'])
 def predict():
-    """Handle image prediction"""
+    """Predict skin type from uploaded image - supports multiple formats"""
     try:
         print(f"🔄 Received prediction request")
         print(f"Content-Type: {request.content_type}")
-        print(f"Request files: {list(request.files.keys()) if request.files else 'None'}")
-        print(f"Request JSON: {bool(request.json)}")
+        print(f"Headers: {dict(request.headers)}")
         
-        saved_filename = None
+        image = None
+        image_source = None
         
-        # Check if image is uploaded via file or base64
-        if 'image' in request.files:
-            print("📁 Processing file upload...")
-            # File upload
-            file = request.files['image']
-            if file.filename == '':
-                print("❌ No file selected")
-                return jsonify({'error': 'No file selected'}), 400
+        # Method 1: JSON dengan base64 (Content-Type: application/json)
+        if request.is_json:
+            try:
+                json_data = request.get_json()
+                print(f"📄 JSON data keys: {list(json_data.keys()) if json_data else 'None'}")
+                
+                if json_data and 'image_data' in json_data:
+                    image_data = json_data['image_data']
+                    print(f"📄 Processing JSON base64 data")
+                    
+                    # Handle data URL format
+                    if image_data.startswith('data:image'):
+                        image_data = image_data.split(',')[1]
+                    
+                    # Decode base64
+                    image_bytes = base64.b64decode(image_data)
+                    image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+                    image_source = "json_base64"
+                    
+            except Exception as e:
+                print(f"❌ Error processing JSON: {e}")
+        
+        # Method 2: Form data dengan file upload (Content-Type: multipart/form-data)
+        elif 'multipart/form-data' in str(request.content_type):
+            print(f"📁 Processing multipart form data")
+            print(f"Form keys: {list(request.form.keys())}")
+            print(f"Files keys: {list(request.files.keys())}")
             
-            if file and allowed_file(file.filename):
-                print(f"✅ Valid file: {file.filename}")
-                # Save uploaded image
-                saved_filename = save_uploaded_image(file.stream)
-                if not saved_filename:
-                    return jsonify({'error': 'Failed to save image'}), 500
-                
-                # Reset file pointer for prediction
-                file.stream.seek(0)
-                
-                # Get prediction
-                print("🔄 Getting prediction...")
-                result = get_prediction(Image.open(file.stream))
-                
-            else:
-                print(f"❌ Invalid file type: {file.filename}")
-                return jsonify({'error': 'Invalid file type'}), 400
-                
-        elif request.json and 'image_data' in request.json:
-            print("📷 Processing base64 image...")
-            # Base64 image data (from camera)
-            image_data = request.json['image_data']
+            # Check for file upload
+            if 'image' in request.files:
+                file = request.files['image']
+                if file and file.filename != '':
+                    print(f"📁 Processing uploaded file: {file.filename}")
+                    image = Image.open(file.stream).convert('RGB')
+                    image_source = "file_upload"
             
-            # Save captured image
-            saved_filename = save_uploaded_image(image_data, is_base64=True)
-            if not saved_filename:
-                return jsonify({'error': 'Failed to save image'}), 500
+            # Check for base64 in form data
+            elif 'image_data' in request.form:
+                image_data = request.form['image_data']
+                print(f"📝 Processing form base64 data")
+                
+                if image_data.startswith('data:image'):
+                    image_data = image_data.split(',')[1]
+                
+                image_bytes = base64.b64decode(image_data)
+                image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+                image_source = "form_base64"
+        
+        # Method 3: Raw form data (Content-Type: application/x-www-form-urlencoded)
+        elif 'application/x-www-form-urlencoded' in str(request.content_type):
+            print(f"📝 Processing URL-encoded form data")
+            print(f"Form keys: {list(request.form.keys())}")
             
-            # Get prediction
-            print("🔄 Getting prediction...")
-            result = get_prediction(image_data)
+            if 'image_data' in request.form:
+                image_data = request.form['image_data']
+                print(f"📝 Processing URL-encoded base64 data")
+                
+                if image_data.startswith('data:image'):
+                    image_data = image_data.split(',')[1]
+                
+                image_bytes = base64.b64decode(image_data)
+                image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+                image_source = "urlencoded_base64"
+        
+        # Method 4: Raw binary data (Content-Type: image/*)
+        elif request.content_type and request.content_type.startswith('image/'):
+            print(f"🖼️ Processing raw image data")
+            image_data = request.get_data()
+            image = Image.open(io.BytesIO(image_data)).convert('RGB')
+            image_source = "raw_image"
+        
+        # Method 5: Try to parse any remaining data as JSON
         else:
-            print("❌ No image provided in request")
-            return jsonify({'error': 'No image provided'}), 400
+            print(f"🔄 Trying to parse as JSON regardless of content-type")
+            try:
+                # Try to get JSON data even if content-type is wrong
+                raw_data = request.get_data(as_text=True)
+                if raw_data:
+                    import json
+                    json_data = json.loads(raw_data)
+                    
+                    if 'image_data' in json_data:
+                        image_data = json_data['image_data']
+                        print(f"📄 Processing fallback JSON base64 data")
+                        
+                        if image_data.startswith('data:image'):
+                            image_data = image_data.split(',')[1]
+                        
+                        image_bytes = base64.b64decode(image_data)
+                        image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+                        image_source = "fallback_json"
+                        
+            except Exception as e:
+                print(f"❌ Fallback JSON parsing failed: {e}")
         
-        print(f"🔄 Prediction result: {result}")
+        # Validate image was successfully loaded
+        if image is None:
+            print("❌ No image found in request")
+            return jsonify({
+                'success': False,
+                'error': 'No image provided or unsupported format',
+                'debug': {
+                    'content_type': str(request.content_type),
+                    'form_keys': list(request.form.keys()),
+                    'files_keys': list(request.files.keys()),
+                    'is_json': request.is_json,
+                    'data_length': len(request.get_data()) if request.get_data() else 0
+                }
+            }), 400
         
-        if result.get('error'):
-            print(f"❌ Prediction error: {result['error']}")
-            return jsonify(result), 500
+        print(f"✅ Image loaded from {image_source}: {image.size}")
         
-        # Store result in session for result page
-        session['last_prediction'] = {
-            'predicted_class': result['predicted_class'],
-            'confidence': result['confidence'],
-            'probabilities': result['probabilities'],
-            'image_filename': saved_filename,
-            'timestamp': datetime.now().isoformat()
-        }
+        # Make prediction
+        from app.service.model_handler import get_prediction
+        result = get_prediction(image)
         
-        # Return result with image filename
-        result['image_filename'] = saved_filename
-        print(f"✅ Prediction successful: {result['predicted_class']}")
-        return jsonify(result)
+        # Check if prediction was successful
+        if 'error' in result:
+            print(f"❌ Prediction failed: {result['error']}")
+            return jsonify({
+                'success': False,
+                'error': result['error'],
+                'predicted_class': result.get('predicted_class', 'normal'),
+                'confidence': result.get('confidence', 0.5),
+                'probabilities': result.get('probabilities', {}),
+                'image_source': image_source
+            }), 500
+        else:
+            print(f"✅ Prediction successful: {result['predicted_class']}")
+            return jsonify({
+                'success': True,
+                'predicted_class': result['predicted_class'],
+                'confidence': result['confidence'],
+                'probabilities': result['probabilities'],
+                'image_source': image_source
+            })
             
     except Exception as e:
-        print(f"❌ Exception in predict endpoint: {e}")
+        print(f"❌ Error in predict route: {e}")
         import traceback
         traceback.print_exc()
-        return jsonify({'error': str(e)}), 500
-
+        
+        return jsonify({
+            'success': False,
+            'error': f'Server error: {str(e)}',
+            'predicted_class': 'normal',
+            'confidence': 0.5,
+            'probabilities': {'berminyak': 0.25, 'kering': 0.25, 'kombinasi': 0.25, 'normal': 0.25}
+        }), 500
+    
+    
 @scan_bp.route('/result')
 def result():
     """Show prediction result page"""

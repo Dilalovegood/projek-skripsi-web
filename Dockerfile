@@ -1,49 +1,40 @@
 FROM python:3.11-slim
 
-# Set working directory
-WORKDIR /app
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    curl \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
     libgomp1 \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for better caching
-COPY requirements.txt .
+WORKDIR /app
 
-# Install Python dependencies
+# Copy requirements first
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
 
-# Create necessary directories
-RUN mkdir -p uploads models app/static/uploads
+# Verify vit_model.pth exists
+RUN ls -la models/ && \
+    if [ ! -f "models/vit_model.pth" ]; then \
+        echo "❌ vit_model.pth not found in models/ directory"; \
+        exit 1; \
+    else \
+        echo "✅ vit_model.pth found"; \
+        ls -lh models/vit_model.pth; \
+    fi
 
-# Copy model file (make sure vit_model.pth exists)
-COPY models/vit_model.pth ./models/
+# Create uploads directory
+RUN mkdir -p app/static/uploads
 
-# Create models/.gitkeep if it doesn't exist
-RUN touch models/.gitkeep
-
-# Set environment variables
-ENV FLASK_ENV=production
-ENV PYTHONPATH=/app
-
-# Expose port (Cloud Run akan set PORT env variable)
+# Expose port
 EXPOSE 8080
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-  CMD curl -f http://localhost:$PORT/ || exit 1
-
-# Use gunicorn for production with proper configuration
-CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120 --preload wsgi:application
+# Run with specific settings for vit_model.pth
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--timeout", "300", "--preload", "app:app"]
