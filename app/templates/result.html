@@ -172,12 +172,10 @@
               </span>
             </div>
             <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
-              {% for tip in skin_info.care_tips %}
-                {% if loop.index <= 2 %}
+              {% for tip in skin_info.cleanser %}
                 <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
                   {{ tip }}
                 </p>
-                {% endif %}
               {% endfor %}
             </div>
           </li>
@@ -191,16 +189,10 @@
               </span>
             </div>
             <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
-              {% for tip in skin_info.care_tips %}
-                {% if loop.index > 2 and loop.index <= 4 %}
-                <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if loop.index > 3 %}mt-4{% endif %}">
+              {% for tip in skin_info.moisturizer %}
+                <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
                   {{ tip }}
                 </p>
-                {% elif loop.index <= 2 %}
-                <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
-                  Gunakan pelembab yang sesuai dengan jenis kulit {{ skin_info.title.lower() }} Anda untuk menjaga kelembaban optimal.
-                </p>
-                {% endif %}
               {% endfor %}
             </div>
           </li>
@@ -214,15 +206,11 @@
               </span>
             </div>
             <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
-              <p class="text-[#515151] text-[16px] md:text-[20px] font-normal">
-                Gunakan sunscreen dengan SPF minimal 30 setiap hari, bahkan saat di dalam ruangan.
-              </p>
-              <p class="text-[#515151] text-[16px] md:text-[20px] font-normal mt-4">
-                Pilih sunscreen yang tidak comedogenic untuk mencegah penyumbatan pori-pori.
-              </p>
-              <p class="text-[#515151] text-[16px] md:text-[20px] font-normal mt-4">
-                Aplikasikan ulang setiap 2-3 jam untuk perlindungan maksimal.
-              </p>
+              {% for tip in skin_info.sunscreen %}
+                <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
+                  {{ tip }}
+                </p>
+              {% endfor %}
             </div>
           </li>
         </ul>

@@ -357,6 +357,7 @@ def result():
         image_filename = request.args.get('image_filename')
     
     # Skin type information dengan data yang lebih lengkap
+# Skin type information dengan data yang lebih lengkap berdasarkan tabel rekomendasi
     skin_info = {
         'normal': {
             'title': 'Normal',
@@ -366,13 +367,23 @@ def result():
                 'Tekstur kulit halus dan lembut',
                 'Tidak terlalu berminyak atau kering',
                 'Jarang mengalami jerawat atau iritasi',
-                'Warna kulit merata dan terlihat sehat'
             ],
-            'care_tips': [
-                'Gunakan pembersih yang lembut dan tidak mengiritasi',
-                'Aplikasikan pelembab sesuai kebutuhan kulit',
-                'Gunakan sunscreen dengan SPF minimal 30 setiap hari',
-                'Lakukan eksfoliasi ringan 1-2 kali seminggu'
+            'cleanser': [
+                'Rose Water (menenangkan, pH balance)',
+                'Glycolic Acid (eksfoliasi ringan)',
+                'Hyaluronic Acid (hidrasi)',
+            ],
+            'moisturizer': [
+                'Ceramide untuk menjaga barrier kulit',
+                'Hyaluronic Acid untuk hidrasi optimal',
+                'Glycerin untuk kelembaban',
+                'Peptides untuk regenerasi kulit',
+                'Non-comedogenic formula'
+            ],
+            'sunscreen': [
+                'Vitamin C, E, Niacinamide (antioksidan)',
+                'Zinc Oxide / Titanium Dioxide (mineral sunscreen)',
+                'Broad Spectrum SPF 30+',
             ]
         },
         'berminyak': {
@@ -385,11 +396,21 @@ def result():
                 'Makeup mudah luntur atau tergeser',
                 'Tekstur kulit agak kasar'
             ],
-            'care_tips': [
-                'Gunakan pembersih yang mengontrol minyak tanpa over-cleansing',
-                'Pilih pelembab yang oil-free dan tidak comedogenic',
-                'Gunakan toner dengan salicylic acid untuk mengecilkan pori',
-                'Lakukan eksfoliasi teratur dengan BHA'
+            'cleanser': [
+                'Niacinamide (kontrol minyak, pori, antiinflamasi)',
+                'Salicylic Acid (eksfoliasi pori)',
+                'Glycolic Acid (eksfoliasi sel mati)',
+                'Hyaluronic Acid (melembapkan)'
+            ],
+            'moisturizer': [
+                'Ceramide untuk memperbaiki barrier kulit',
+                'Hyaluronic Acid untuk hidrasi tanpa berminyak',
+                'Niacinamide untuk kontrol sebum',
+                'Salicylic Acid untuk mencegah komedo',
+            ],
+            'sunscreen': [
+                'Zinc Oxide atau Titanium Dioxide',
+                'Non-comedogenic untuk mencegah jerawat',
             ]
         },
         'kering': {
@@ -402,11 +423,22 @@ def result():
                 'Mudah iritasi dan sensitif',
                 'Garis-garis halus lebih terlihat'
             ],
-            'care_tips': [
-                'Gunakan pembersih yang lembut dan melembabkan',
-                'Aplikasikan pelembab yang kaya akan ceramide dan hyaluronic acid',
-                'Hindari produk berbasis alkohol atau parfum',
-                'Gunakan humidifier di ruangan untuk menambah kelembaban'
+            'cleanser': [
+                'Glycerin (melembapkan)',
+                'Vitamin E, Minyak Jojoba (melembapkan tanpa rasa berat)',
+                'Urea (mengurangi kehilangan air)',
+            ],
+            'moisturizer': [
+                'Ceramide untuk memperkuat skin barrier',
+                'Shea Butter untuk nutrisi intensif',
+                'Squalane untuk kelembaban mendalam',
+                'Glycerin untuk hidrasi',
+                'Panthenol untuk menenangkan kulit'
+            ],
+            'sunscreen': [
+                'Sunscreen SPF 30+ dengan formula melembapkan',
+                'Tambahan pelembap dalam sunscreen',
+                'Hindari formula yang mengandung alkohol',
             ]
         },
         'kombinasi': {
@@ -419,15 +451,25 @@ def result():
                 'Jerawat sering muncul di T-zone',
                 'Membutuhkan perawatan berbeda untuk area yang berbeda'
             ],
-            'care_tips': [
-                'Gunakan produk yang berbeda untuk area yang berbeda',
-                'Fokus kontrol minyak di T-zone dengan salicylic acid',
-                'Berikan kelembaban ekstra di area pipi yang kering',
-                'Gunakan masker clay khusus untuk T-zone saja'
+            'cleanser': [
+                'Mild surfaktan seperti Sodium Cocoyl Isethionate',
+                'Sodium Lauroyl Methyl Isethionate',
+                'Cocamidopropyl Betaine',
+                'Decyl Glucoside untuk pembersihan lembut'
+            ],
+            'moisturizer': [
+                'Ringan di T-zone, lebih kaya di area kering',
+                'Niacinamide untuk kontrol minyak di T-zone',
+                'Hyaluronic Acid untuk hidrasi seimbang',
+                'Aloe Vera untuk menenangkan kulit',
+            ],
+            'sunscreen': [
+                'Sunscreen non-comedogenic',
+                'SPF minimal 30 dengan broad spectrum',
+                'Tekstur ringan agar tidak berminyak di T-zone',
             ]
         }
-    }
-    
+    }    
     current_skin_info = skin_info.get(prediction, skin_info['normal'])
     
     return render_template('result.html', 
