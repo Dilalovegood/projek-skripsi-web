@@ -161,7 +161,7 @@
       </div>
     </header>
 
-    <section id="hero-section" class="relative flex flex-col lg:flex-row justify-between items-center mt-20 lg:mt-24 px-4 lg:px-0 container mx-auto">
+    <section id="hero-section" class="relative flex flex-col lg:flex-row justify-between items-center mt-30 lg:mt-40 px-4 lg:px-0 container mx-auto">
       <div class="max-w-full lg:max-w-[661px] z-10 text-center lg:text-left mb-8 lg:mb-0">
         <h1 class="text-[32px] sm:text-[40px] lg:text-[58px] font-bold text-secondary leading-[40px] sm:leading-[50px] lg:leading-[70px]">
           Kesehatan <span class="text-primary">kulitmu</span> adalah prioritas
@@ -187,7 +187,7 @@
     </section>
 
     <section id="about-section" class="flex flex-col lg:flex-row justify-between items-center mt-5 md:mt-20 gap-8 lg:gap-[58px] px-4 lg:px-0 container mx-auto pt-5 md:pt-20">
-      <div class="w-full lg:w-1/2">
+      <div class="w-full lg:w-[40%]">
         <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="" class="w-full h-auto" />
       </div>
       <div class="w-full lg:w-1/2">
@@ -247,337 +247,339 @@
       </div>
     </section>
 
-    <div id="modalBerminyak" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('berminyak')">&times;</span>
-        <div class="relative">
-          <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="Kulit Berminyak" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
-          <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Berminyak</h2>
+<div id="modalBerminyak" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('berminyak')">&times;</span>
+    <div class="relative">
+      <img src="{{ url_for('static', filename='images/berminyak.png') }}" alt="Kulit Berminyak" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
+      <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Berminyak</h2>
+      </div>
+    </div>
+    <div class="p-4 sm:p-6 lg:p-8">
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Berminyak:</h3>
+        <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
+          <li>Pori-pori besar dan terlihat jelas</li>
+          <li>Wajah terlihat mengkilap terutama di T-zone</li>
+          <li>Mudah berjerawat dan berkomedo</li>
+          <li>Makeup mudah luntur atau tergeser</li>
+          <li>Tekstur kulit agak kasar</li>
+        </ul>
+      </div>
+      
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
+        
+        <!-- Cleanser -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Cleanser
+            </span>
           </div>
-        </div>
-        <div class="p-4 sm:p-6 lg:p-8">
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Berminyak:</h3>
-            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
-              <li>Produksi sebum berlebihan</li>
-              <li>Pori-pori terlihat besar dan jelas</li>
-              <li>Wajah terlihat mengkilap, terutama di T-zone</li>
-              <li>Rentan berjerawat dan komedo</li>
-              <li>Makeup mudah luntur</li>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Niacinamide (kontrol minyak, pori, antiinflamasi)</li>
+              <li>• Salicylic Acid (eksfoliasi pori)</li>
+              <li>• Glycolic Acid (eksfoliasi sel mati)</li>
+              <li>• Hyaluronic Acid (melembapkan)</li>
             </ul>
           </div>
-          
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
-            
-            <!-- Cleanser -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Cleanser
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan pembersih yang mengontrol minyak tanpa over-cleansing
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Pilih cleanser dengan salicylic acid atau tea tree oil untuk mengontrol sebum
-                </p>
-              </div>
-            </div>
+        </div>
 
-            <!-- Moisturizer -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Moisturizer
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Pilih pelembab yang oil-free dan tidak comedogenic
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Gunakan gel-based moisturizer dengan hyaluronic acid untuk hidrasi tanpa rasa berminyak
-                </p>
-              </div>
-            </div>
+        <!-- Moisturizer -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Moisturizer
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Ceramide untuk memperbaiki barrier kulit</li>
+              <li>• Hyaluronic Acid untuk hidrasi tanpa berminyak</li>
+              <li>• Niacinamide untuk kontrol sebum</li>
+              <li>• Salicylic Acid untuk mencegah komedo</li>
+            </ul>
+          </div>
+        </div>
 
-            <!-- Sunscreen -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Sunscreen
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan sunscreen dengan SPF minimal 30 setiap hari
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Pilih sunscreen non-comedogenic dengan tekstur ringan yang tidak menyumbat pori
-                </p>
-              </div>
-            </div>
+        <!-- Sunscreen -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Sunscreen
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Zinc Oxide atau Titanium Dioxide</li>
+              <li>• Non-comedogenic untuk mencegah jerawat</li>
+              <li>• Tekstur ringan yang tidak menyumbat pori</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div id="modalKering" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('kering')">&times;</span>
-        <div class="relative">
-          <img src="{{ url_for('static', filename='images/kering.png') }}" alt="Kulit Kering" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
-          <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Kering</h2>
+<div id="modalKering" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('kering')">&times;</span>
+    <div class="relative">
+      <img src="{{ url_for('static', filename='images/kering.png') }}" alt="Kulit Kering" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
+      <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Kering</h2>
+      </div>
+    </div>
+    <div class="p-4 sm:p-6 lg:p-8">
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kering:</h3>
+        <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
+          <li>Kulit terasa kencang terutama setelah dibersihkan</li>
+          <li>Mudah mengelupas dan bersisik</li>
+          <li>Pori-pori hampir tidak terlihat</li>
+          <li>Mudah iritasi dan sensitif</li>
+          <li>Garis-garis halus lebih terlihat</li>
+        </ul>
+      </div>
+      
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
+        
+        <!-- Cleanser -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Cleanser
+            </span>
           </div>
-        </div>
-        <div class="p-4 sm:p-6 lg:p-8">
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kering:</h3>
-            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
-              <li>Produksi sebum sangat sedikit</li>
-              <li>Terasa kencang dan kasar</li>
-              <li>Mudah mengelupas dan bersisik</li>
-              <li>Pori-pori hampir tidak terlihat</li>
-              <li>Rentan teriritasi dan kemerahan</li>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Glycerin (melembapkan)</li>
+              <li>• Vitamin E, Minyak Jojoba (melembapkan tanpa rasa berat)</li>
+              <li>• Urea (mengurangi kehilangan air)</li>
+              <li>• Hindari pembersih berbasis alkohol yang keras</li>
             </ul>
           </div>
-          
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
-            
-            <!-- Cleanser -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Cleanser
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan pembersih yang lembut dan melembabkan
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Pilih cream cleanser atau oil cleanser yang tidak menghilangkan minyak alami kulit
-                </p>
-              </div>
-            </div>
+        </div>
 
-            <!-- Moisturizer -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Moisturizer
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Aplikasikan pelembab yang kaya akan ceramide dan hyaluronic acid
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Gunakan rich cream moisturizer dengan shea butter dan natural oils
-                </p>
-              </div>
-            </div>
+        <!-- Moisturizer -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Moisturizer
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Ceramide untuk memperkuat skin barrier</li>
+              <li>• Shea Butter untuk nutrisi intensif</li>
+              <li>• Squalane untuk kelembaban mendalam</li>
+              <li>• Glycerin untuk hidrasi</li>
+              <li>• Panthenol untuk menenangkan kulit</li>
+            </ul>
+          </div>
+        </div>
 
-            <!-- Sunscreen -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Sunscreen
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan sunscreen dengan SPF minimal 30 setiap hari
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Pilih sunscreen yang melembabkan dengan tekstur creamy untuk nutrisi ekstra
-                </p>
-              </div>
-            </div>
+        <!-- Sunscreen -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Sunscreen
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Sunscreen SPF 30+ dengan formula melembapkan</li>
+              <li>• Tambahan pelembap dalam sunscreen</li>
+              <li>• Hindari formula yang mengandung alkohol</li>
+              <li>• Pilih sunscreen dengan tekstur creamy</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div id="modalKombinasi" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('kombinasi')">&times;</span>
-        <div class="relative">
-          <img src="{{ url_for('static', filename='images/kombinasi.png') }}" alt="Kulit Kombinasi" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
-          <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Kombinasi</h2>
+<div id="modalKombinasi" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('kombinasi')">&times;</span>
+    <div class="relative">
+      <img src="{{ url_for('static', filename='images/kombinasi.png') }}" alt="Kulit Kombinasi" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
+      <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Kombinasi</h2>
+      </div>
+    </div>
+    <div class="p-4 sm:p-6 lg:p-8">
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kombinasi:</h3>
+        <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
+          <li>T-zone (dahi, hidung, dagu) berminyak</li>
+          <li>Pipi cenderung normal atau kering</li>
+          <li>Pori-pori besar di area T-zone</li>
+          <li>Jerawat sering muncul di T-zone</li>
+          <li>Membutuhkan perawatan berbeda untuk area yang berbeda</li>
+        </ul>
+      </div>
+      
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
+        
+        <!-- Cleanser -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Cleanser
+            </span>
           </div>
-        </div>
-        <div class="p-4 sm:p-6 lg:p-8">
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Kombinasi:</h3>
-            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
-              <li>T-zone (dahi, hidung, dagu) berminyak</li>
-              <li>Area pipi cenderung normal atau kering</li>
-              <li>Pori-pori besar di T-zone</li>
-              <li>Rentan blackhead di area hidung</li>
-              <li>Membutuhkan perawatan berbeda untuk area berbeda</li>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Mild surfaktan seperti Sodium Cocoyl Isethionate</li>
+              <li>• Sodium Lauroyl Methyl Isethionate</li>
+              <li>• Cocamidopropyl Betaine</li>
+              <li>• Decyl Glucoside untuk pembersihan lembut</li>
             </ul>
           </div>
-          
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
-            
-            <!-- Cleanser -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Cleanser
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan produk yang berbeda untuk area yang berbeda
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Pilih gentle foaming cleanser atau micellar water yang seimbang untuk seluruh wajah
-                </p>
-              </div>
-            </div>
+        </div>
 
-            <!-- Moisturizer -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Moisturizer
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Fokus kontrol minyak di T-zone dengan salicylic acid
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Berikan kelembaban ekstra di area pipi yang kering dengan lightweight gel untuk T-zone dan cream moisturizer untuk pipi
-                </p>
-              </div>
-            </div>
+        <!-- Moisturizer -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Moisturizer
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Ringan di T-zone, lebih kaya di area kering</li>
+              <li>• Niacinamide untuk kontrol minyak di T-zone</li>
+              <li>• Hyaluronic Acid untuk hidrasi seimbang</li>
+              <li>• Aloe Vera untuk menenangkan kulit</li>
+              <li>• Gunakan produk berbeda untuk area berbeda</li>
+            </ul>
+          </div>
+        </div>
 
-            <!-- Sunscreen -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Sunscreen
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan sunscreen dengan SPF minimal 30 setiap hari
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Gunakan masker clay khusus untuk T-zone saja untuk mengontrol minyak berlebih
-                </p>
-              </div>
-            </div>
+        <!-- Sunscreen -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Sunscreen
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Sunscreen non-comedogenic</li>
+              <li>• SPF minimal 30 dengan broad spectrum</li>
+              <li>• Tekstur ringan agar tidak berminyak di T-zone</li>
+              <li>• Aplikasikan merata di seluruh wajah</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div id="modalNormal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('normal')">&times;</span>
-        <div class="relative">
-          <img src="{{ url_for('static', filename='images/normal.png') }}" alt="Kulit Normal" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
-          <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Normal</h2>
+<div id="modalNormal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('normal')">&times;</span>
+    <div class="relative">
+      <img src="{{ url_for('static', filename='images/normal.png') }}" alt="Kulit Normal" class="w-full h-48 sm:h-56 lg:h-64 object-cover rounded-t-[20px]">
+      <div class="absolute inset-0 bg-black opacity-50 rounded-t-[20px]"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <h2 class="text-white font-bold text-[24px] sm:text-[30px] lg:text-[36px] text-center">Kulit Normal</h2>
+      </div>
+    </div>
+    <div class="p-4 sm:p-6 lg:p-8">
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Normal:</h3>
+        <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
+          <li>Pori-pori kecil dan tidak terlalu terlihat</li>
+          <li>Tekstur kulit halus dan lembut</li>
+          <li>Tidak terlalu berminyak atau kering</li>
+          <li>Jarang mengalami jerawat atau iritasi</li>
+          <li>Warna kulit merata dan terlihat sehat</li>
+        </ul>
+      </div>
+      
+      <div class="mb-6">
+        <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
+        
+        <!-- Cleanser -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Cleanser
+            </span>
           </div>
-        </div>
-        <div class="p-4 sm:p-6 lg:p-8">
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-secondary mb-4">Karakteristik Kulit Normal:</h3>
-            <ul class="list-disc pl-5 text-desc text-[16px] sm:text-[17px] lg:text-[18px] space-y-2">
-              <li>Produksi sebum seimbang</li>
-              <li>Tidak terlalu berminyak atau kering</li>
-              <li>Pori-pori hampir tidak terlihat</li>
-              <li>Tekstur halus dan elastis</li>
-              <li>Jarang bermasalah dengan jerawat</li>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Rose Water (menenangkan, pH balance)</li>
+              <li>• Glycolic Acid (eksfoliasi ringan)</li>
+              <li>• Hyaluronic Acid (hidrasi)</li>
+              <li>• Gunakan pembersih yang lembut dan tidak mengiritasi</li>
             </ul>
           </div>
-          
-          <div class="mb-6">
-            <h3 class="text-[20px] sm:text-[22px] lg:text-[24px] font-bold text-primary mb-4">Rekomendasi Perawatan:</h3>
-            
-            <!-- Cleanser -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Cleanser
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan pembersih yang lembut dan tidak mengiritasi
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Pilih gentle gel cleanser atau foam cleanser dengan pH balanced
-                </p>
-              </div>
-            </div>
+        </div>
 
-            <!-- Moisturizer -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Moisturizer
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Aplikasikan pelembab sesuai kebutuhan kulit
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Gunakan lightweight lotion atau gel-cream hybrid dengan ceramides
-                </p>
-              </div>
-            </div>
+        <!-- Moisturizer -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Moisturizer
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Ceramide untuk menjaga barrier kulit</li>
+              <li>• Hyaluronic Acid untuk hidrasi optimal</li>
+              <li>• Glycerin untuk kelembaban</li>
+              <li>• Peptides untuk regenerasi kulit</li>
+              <li>• Non-comedogenic formula</li>
+            </ul>
+          </div>
+        </div>
 
-            <!-- Sunscreen -->
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
-              <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
-                <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
-                <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
-                  Sunscreen
-                </span>
-              </div>
-              <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] mb-2">
-                  Gunakan sunscreen dengan SPF minimal 30 setiap hari
-                </p>
-                <p class="text-desc text-[14px] sm:text-[15px] lg:text-[16px]">
-                  Lakukan eksfoliasi ringan 1-2 kali seminggu untuk maintenance optimal
-                </p>
-              </div>
-            </div>
+        <!-- Sunscreen -->
+        <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 mb-6">
+          <div class="px-4 max-w-[200px] flex flex-col items-center flex-shrink-0">
+            <img class="max-w-[60px] lg:max-w-[80px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
+            <span class="text-[14px] lg:text-[16px] text-center w-full text-primary font-semibold mt-2">
+              Sunscreen
+            </span>
+          </div>
+          <div class="p-4 lg:p-6 bg-[#EAF5F4] rounded-lg w-full">
+            <ul class="text-desc text-[14px] sm:text-[15px] lg:text-[16px] space-y-1">
+              <li>• Vitamin C, E, Niacinamide (antioksidan)</li>
+              <li>• Zinc Oxide / Titanium Dioxide (mineral sunscreen)</li>
+              <li>• Broad Spectrum SPF 30+</li>
+              <li>• Gunakan setiap hari tanpa kecuali</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
     <section class="mt-20 px-4 lg:px-0 container mx-auto">
       <div class="relative">

@@ -469,7 +469,10 @@ def result():
                 'Tekstur ringan agar tidak berminyak di T-zone',
             ]
         }
-    }    
+    }   
+
+
+    
     current_skin_info = skin_info.get(prediction, skin_info['normal'])
     
     return render_template('result.html', 
