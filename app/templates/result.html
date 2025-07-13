@@ -161,60 +161,63 @@
       </div>
 
       <!-- Care Tips Section -->
-      <div class="w-full max-w-6xl">
-        <ul class="flex flex-col gap-8 md:gap-12">
-          <!-- Cleanser -->
-          <li class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
-            <div class="px-4 lg:px-10 max-w-[300px] flex flex-col items-center flex-shrink-0">
-              <img class="max-w-[80px] md:max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
-              <span class="text-[16px] md:text-[18px] text-center w-full text-primary font-semibold mt-4">
-                Cleanser
-              </span>
-            </div>
-            <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
-              {% for tip in skin_info.cleanser %}
-                <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
-                  {{ tip }}
-                </p>
-              {% endfor %}
-            </div>
-          </li>
+      {% if skin_info.cleanser %}
+        <div class="w-full max-w-6xl">
+          <ul class="flex flex-col gap-8 md:gap-12">
+            <!-- Cleanser -->
+            <li class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+              <div class="px-4 lg:px-10 max-w-[300px] flex flex-col items-center flex-shrink-0">
+                <img class="max-w-[80px] md:max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Frame 37.svg') }}" alt="Cleanser">
+                <span class="text-[16px] md:text-[18px] text-center w-full text-primary font-semibold mt-4">
+                  Cleanser
+                </span>
+              </div>
+              <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
+                {% for tip in skin_info.cleanser %}
 
-          <!-- Moisturizer -->
-          <li class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
-            <div class="px-4 lg:px-10 max-w-[300px] flex flex-col items-center flex-shrink-0">
-              <img class="max-w-[80px] md:max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
-              <span class="text-[16px] md:text-[18px] text-center w-full text-primary font-semibold mt-4">
-                Moisturizer
-              </span>
-            </div>
-            <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
-              {% for tip in skin_info.moisturizer %}
-                <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
-                  {{ tip }}
-                </p>
-              {% endfor %}
-            </div>
-          </li>
+                  <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
+                    {{ tip }}
+                  </p>
+                {% endfor %}
+              </div>
+            </li>
 
-          <!-- Sunscreen -->
-          <li class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
-            <div class="px-4 lg:px-10 max-w-[300px] flex flex-col items-center flex-shrink-0">
-              <img class="max-w-[80px] md:max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
-              <span class="text-[16px] md:text-[18px] text-center w-full text-primary font-semibold mt-4">
-                Sunscreen
-              </span>
-            </div>
-            <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
-              {% for tip in skin_info.sunscreen %}
-                <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
-                  {{ tip }}
-                </p>
-              {% endfor %}
-            </div>
-          </li>
-        </ul>
-      </div>
+            <!-- Moisturizer -->
+            <li class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+              <div class="px-4 lg:px-10 max-w-[300px] flex flex-col items-center flex-shrink-0">
+                <img class="max-w-[80px] md:max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Group 32.svg') }}" alt="Moisturizer">
+                <span class="text-[16px] md:text-[18px] text-center w-full text-primary font-semibold mt-4">
+                  Moisturizer
+                </span>
+              </div>
+              <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
+                {% for tip in skin_info.moisturizer %}
+                  <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
+                    {{ tip }}
+                  </p>
+                {% endfor %}
+              </div>
+            </li>
+
+            <!-- Sunscreen -->
+            <li class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+              <div class="px-4 lg:px-10 max-w-[300px] flex flex-col items-center flex-shrink-0">
+                <img class="max-w-[80px] md:max-w-[100px] object-contain" src="{{ url_for('static', filename='images/Frame 38.svg') }}" alt="Sunscreen">
+                <span class="text-[16px] md:text-[18px] text-center w-full text-primary font-semibold mt-4">
+                  Sunscreen
+                </span>
+              </div>
+              <div class="p-6 lg:p-10 bg-[#EAF5F4] rounded-xl w-full">
+                {% for tip in skin_info.sunscreen %}
+                  <p class="text-[#515151] text-[16px] md:text-[20px] font-normal {% if not loop.first %}mt-4{% endif %}">
+                    {{ tip }}
+                  </p>
+                {% endfor %}
+              </div>
+            </li>
+          </ul>
+        </div>
+      {% endif %}
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 mt-12 md:mt-20">
