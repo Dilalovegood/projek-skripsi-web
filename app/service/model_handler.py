@@ -13,7 +13,15 @@ class SkinTypePredictor:
         self.device = device if device else torch.device('cpu')
         self.model_path = model_path
         self.model = None
-        self.class_names = ['berminyak', 'kering', 'kombinasi', 'normal']
+        self.class_names = ['combination', 'dry', 'normal', 'oily']  # Sesuai training classes
+        
+        # Mapping untuk translate ke bahasa Indonesia untuk display
+        self.class_mapping = {
+            'combination': 'kombinasi',
+            'dry': 'kering', 
+            'normal': 'normal',
+            'oily': 'berminyak'
+        }
         
         # Load model
         self.load_model()
@@ -47,6 +55,8 @@ class SkinTypePredictor:
             self.model.to(self.device)
             
             print("✅ Model loaded successfully")
+            print(f"📊 Training classes: {self.class_names}")
+            print(f"🔄 Class mapping: {self.class_mapping}")
             
         except Exception as e:
             print(f"❌ Error loading model: {e}")
@@ -96,11 +106,17 @@ class SkinTypePredictor:
                 # Get all probabilities
                 all_probs = probabilities.cpu().numpy()[0]
                 
+                # Get predicted class in English (training format)
+                predicted_class_en = self.class_names[predicted.item()]
+                
+                # Translate to Indonesian for display
+                predicted_class_id = self.class_mapping[predicted_class_en]
+                
                 return {
-                    'predicted_class': self.class_names[predicted.item()],
+                    'predicted_class': predicted_class_id,  # Bahasa Indonesia untuk display
                     'confidence': float(confidence.item()),
                     'probabilities': {
-                        self.class_names[i]: float(prob) 
+                        self.class_mapping[self.class_names[i]]: float(prob)  # Translate semua ke Indonesia
                         for i, prob in enumerate(all_probs)
                     }
                 }
@@ -111,7 +127,7 @@ class SkinTypePredictor:
                 'error': str(e),
                 'predicted_class': 'normal',
                 'confidence': 0.5,
-                'probabilities': {name: 0.25 for name in self.class_names}
+                'probabilities': {'berminyak': 0.25, 'kering': 0.25, 'kombinasi': 0.25, 'normal': 0.25}
             }
 
 # Global predictor instance

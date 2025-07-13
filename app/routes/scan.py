@@ -133,6 +133,18 @@ def result():
     confidence = prediction_data['confidence']
     image_filename = prediction_data.get('image_filename')
     
+    # Mapping dari training classes ke display classes
+    class_mapping = {
+        'combination': 'kombinasi',
+        'dry': 'kering', 
+        'normal': 'normal',
+        'oily': 'berminyak'
+    }
+    
+    # Jika prediction masih dalam format training classes, translate ke display format
+    if prediction in class_mapping:
+        prediction = class_mapping[prediction]
+    
     # Skin type information
     skin_info_data = {
         'normal': {
